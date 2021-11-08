@@ -104,8 +104,8 @@ export default function createInlinePluginCreator(
       const commits = await getCommitsFiltered(
         cwd,
         dir,
-        (context.lastRelease != null) ? context.lastRelease.gitHead : undefined,
-        (context.nextRelease != null) ? context.nextRelease.gitHead : undefined,
+        context.lastRelease != null ? context.lastRelease.gitHead : undefined,
+        context.nextRelease != null ? context.nextRelease.gitHead : undefined,
         firstParentBranch,
       )
 
@@ -193,8 +193,8 @@ export default function createInlinePluginCreator(
       const commits = await getCommitsFiltered(
         cwd,
         dir,
-        (context.lastRelease != null) ? context.lastRelease.gitHead : undefined,
-        (context.nextRelease != null) ? context.nextRelease.gitHead : undefined,
+        context.lastRelease != null ? context.lastRelease.gitHead : undefined,
+        context.nextRelease != null ? context.nextRelease.gitHead : undefined,
         firstParentBranch,
       )
 

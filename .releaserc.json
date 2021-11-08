@@ -1,0 +1,10 @@
+{
+  "branch": "master",
+  "preset": "angular",
+  "plugins": [
+    ["@semantic-release/release-notes-generator"],
+    ["@semantic-release/commit-analyzer"],
+    ["@semantic-release/github"],
+    ["@semantic-release/npm"]
+  ]
+}
