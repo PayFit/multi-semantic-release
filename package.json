@@ -22,7 +22,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix ./",
     "test": "jest --coverage",
-    "test:ci": "GITHUB_REF=master GITHUB_EVENT_NAME=merge GITHUB_ACTIONS=true jest --coverage",
+    "test:ci": "GITHUB_REF=master GITHUB_EVENT_NAME=merge GITHUB_ACTIONS=true yarn test",
     "test:watch": "jest --watchAll",
     "pre-commit": "lint-staged",
     "prepare": "husky install",

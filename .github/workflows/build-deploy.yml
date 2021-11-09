@@ -2,9 +2,6 @@ name: Node.js CI
 
 on: push
 
-env:
-  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -14,6 +11,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
+          cache: yarn
           node-version: '16.3.0'
       - name: Install dependencies
         run: yarn --frozen-lockfile
@@ -29,12 +27,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - run: git config --global user.name test
-      - run: git config --global user.email test@payfit.com
+      - run: git config --global user.name github-actions
+      - run: git config --global user.email github-actions@github.com
       - run: git config --global init.defaultBranch master
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
+          cache: yarn
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -53,8 +52,11 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
+          cache: yarn
           node-version: '16.3.0'
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: yarn release
