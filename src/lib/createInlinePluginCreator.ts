@@ -124,6 +124,7 @@ export default function createInlinePluginCreator(
       // Make sure type is "patch" if the package has any deps that have changed.
       pkg._nextType = resolveReleaseType(
         pkg,
+        multiContext,
         flags.deps?.bump,
         flags.deps?.release,
       )
