@@ -37,8 +37,8 @@ jobs:
         run: yarn --frozen-lockfile
       - run: yarn build
       - run: |
-          git config user.name test
-          git config user.email test@payfit.com
+          git config --global user.name test
+          git config --global user.email test@payfit.com
           yarn test
 
   deploy:
