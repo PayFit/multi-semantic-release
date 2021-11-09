@@ -4,7 +4,7 @@
   "version": "0.0.0-development",
   "license": "0BSD",
   "engines": {
-    "node": ">=12",
+    "node": ">=14",
     "yarn": ">=1.0.0"
   },
   "main": "dist/lib/multiSemanticRelease.js",
