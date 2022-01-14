@@ -137,7 +137,7 @@ describe('multiSemanticRelease()', () => {
     // Check manifests.
     expect(require(`${cwd}/packages/a/package.json`)).toMatchObject({
       peerDependencies: {
-        'msr-test-c': '1.0.0',
+        'msr-test-c': '^1.0.0',
       },
     })
     expect(require(`${cwd}/packages/b/package.json`)).toMatchObject({
@@ -278,7 +278,7 @@ describe('multiSemanticRelease()', () => {
     // Check manifests.
     expect(require(`${cwd}/packages/a/package.json`)).toMatchObject({
       peerDependencies: {
-        'msr-test-c': '1.0.0-dev.1',
+        'msr-test-c': '^1.0.0-dev.1',
       },
     })
     expect(require(`${cwd}/packages/b/package.json`)).toMatchObject({
@@ -652,7 +652,7 @@ describe('multiSemanticRelease()', () => {
     // Check manifests.
     expect(require(`${cwd}/packages/a/package.json`)).toMatchObject({
       peerDependencies: {
-        'msr-test-c': '1.0.0-dev.2',
+        'msr-test-c': '^1.0.0-dev.2',
       },
     })
     expect(require(`${cwd}/packages/b/package.json`)).toMatchObject({
@@ -827,7 +827,7 @@ describe('multiSemanticRelease()', () => {
     // Check manifests.
     expect(require(`${cwd}/packages/a/package.json`)).toMatchObject({
       peerDependencies: {
-        'msr-test-c': '1.0.0',
+        'msr-test-c': '^1.0.0',
       },
     })
     expect(require(`${cwd}/packages/b/package.json`)).toMatchObject({

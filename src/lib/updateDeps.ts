@@ -38,7 +38,7 @@ export const resolveNextVersion = (
   currentVersion: string,
   nextVersion: string,
   strategy: ReleaseType | 'inherit' | 'satisfy' | 'override' = 'override',
-): string | undefined => {
+): string => {
   // Check the next pkg version against its current references.
   // If it matches (`*` matches to any, `1.1.0` matches `1.1.x`, `1.5.0` matches to `^1.0.0` and so on)
   // release will not be triggered, if not `override` strategy will be applied instead.
@@ -119,8 +119,11 @@ const getDependentRelease = (
       releaseStrategy,
     )
     if (currentVersion !== resolvedVersion) {
+      // allow to keep the ^ or ~ for versions
+      const prefix = currentVersion.match(/^([\^~]?)/g)
       // eslint-disable-next-line no-param-reassign
-      scope[name] = resolvedVersion
+      scope[name] =
+        prefix === null ? resolvedVersion : `${prefix[0]}${resolvedVersion}`
       return true
     }
 
