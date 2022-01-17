@@ -40,7 +40,7 @@
     "execa": "^5.1.1",
     "get-stream": "^6.0.1",
     "git-log-parser": "^1.2.0",
-    "globby": "^11.0.4",
+    "globby": "^12.0.0",
     "lodash": "^4.17.21",
     "meow": "^9.0.0",
     "promise-events": "^0.2.4",
