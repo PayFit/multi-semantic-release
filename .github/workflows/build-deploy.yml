@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
@@ -26,7 +26,7 @@ jobs:
         node-version: [14.x, 16.x, 17.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: git config --global user.name github-actions
       - run: git config --global user.email github-actions@github.com
       - run: git config --global init.defaultBranch master
@@ -48,7 +48,7 @@ jobs:
       - test-and-build
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
