@@ -64,7 +64,7 @@
     "@types/stream-buffers": "3.0.4",
     "@typescript-eslint/eslint-plugin": "5.15.0",
     "@typescript-eslint/parser": "5.15.0",
-    "commitlint": "16.2.1",
+    "commitlint": "16.2.3",
     "coveralls": "3.1.1",
     "eslint": "8.11.0",
     "eslint-config-prettier": "8.5.0",
