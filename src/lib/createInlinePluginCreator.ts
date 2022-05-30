@@ -63,7 +63,7 @@ export default function createInlinePluginCreator(
       context: VerifyConditionsContext,
     ) => {
       // Restore context for plugins that does not rely on parsed opts.
-      Object.assign(context.options, context.options?._pkgOptions)
+      Object.assign(context.options ?? {}, context.options?._pkgOptions)
 
       pkg._ready = true
 
