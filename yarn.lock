@@ -1314,10 +1314,10 @@
   resolved "https://registry.yarnpkg.com/@types/retry/-/retry-0.12.0.tgz#2b35eccfcee7d38cd72ad99232fbd58bffb3c84d"
   integrity sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==
 
-"@types/semantic-release@17.2.3":
-  version "17.2.3"
-  resolved "https://registry.yarnpkg.com/@types/semantic-release/-/semantic-release-17.2.3.tgz#f5b09ab68e09d1949e9012a5191fe938a25b54c4"
-  integrity sha512-iSqx8cZbDRQSCi/VR1LtmUV4OFiDZVAvfpVdVeq3rPveXYU+xb3bzmVphXSw7wkFgE7LwAoaoE96RV4nkL0Rvg==
+"@types/semantic-release@17.2.4":
+  version "17.2.4"
+  resolved "https://registry.yarnpkg.com/@types/semantic-release/-/semantic-release-17.2.4.tgz#2b82cd645a4e10547737d37248ca581ab799fa33"
+  integrity sha512-Ud2GB2+0WgyBrKB7PbyZA+bud3QD0z3Iv6KPx6FfeMUNDekw3EWgZi3eLKXoeGDPBo+hev74NN1pEPMp0rL2vQ==
   dependencies:
     "@types/node" "*"
 
