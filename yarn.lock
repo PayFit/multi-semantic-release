@@ -6097,10 +6097,10 @@ saxes@^5.0.1:
   dependencies:
     xmlchars "^2.2.0"
 
-"semantic-release@npm:@killianhmyd/semantic-release@0.0.0-notes-fix.6":
-  version "0.0.0-notes-fix.6"
-  resolved "https://registry.yarnpkg.com/@killianhmyd/semantic-release/-/semantic-release-0.0.0-notes-fix.6.tgz#238e1dc10962e256f2ea6d323f96a8f180a6a6e3"
-  integrity sha512-nEevaPigxAtsoZEdtumZHpStww/uSasYlFpj1msTs/EvjVhsWEnIsZuIcdd3ZlIvPr5rqb4L41bEqdzBbJaPyQ==
+"semantic-release@npm:@killianhmyd/semantic-release@0.0.0-notes-fix.7":
+  version "0.0.0-notes-fix.7"
+  resolved "https://registry.yarnpkg.com/@killianhmyd/semantic-release/-/semantic-release-0.0.0-notes-fix.7.tgz#455aa77546d791522b1b4ae0f8a28a858a048c55"
+  integrity sha512-pjHL0tDblsQzNdnnIL0xrRFhG0bNlrUHGvup1x8NlOpSBIo4XXxZ1C6byq3589ttzSpWAuC1xTwvmeoYhq8aow==
   dependencies:
     "@semantic-release/commit-analyzer" "^9.0.2"
     "@semantic-release/error" "^3.0.0"
