@@ -57,7 +57,7 @@
     "@types/execa": "2.0.0",
     "@types/jest": "29.1.1",
     "@types/lodash": "4.14.186",
-    "@types/node": "16.11.63",
+    "@types/node": "16.11.64",
     "@types/semantic-release": "17.2.4",
     "@types/semver": "7.3.12",
     "@types/signale": "1.4.4",
