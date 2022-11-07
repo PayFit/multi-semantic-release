@@ -1,4 +1,4 @@
-/* eslint-disable node/no-path-concat */
+/* eslint-disable n/no-path-concat */
 import { resolve } from 'path'
 import getPackagePaths from '../../lib/getPackagePaths'
 

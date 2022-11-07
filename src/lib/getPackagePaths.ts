@@ -47,7 +47,7 @@ export default function getPackagePaths(
   const workspacePackages = globby.sync(
     packages.map((p: string) => p.replace(/\/?$/, '/package.json')),
     {
-      cwd: cwd,
+      cwd,
       absolute: true,
       gitignore: true,
     },
