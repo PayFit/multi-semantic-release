@@ -2271,7 +2271,17 @@ cosmiconfig-typescript-loader@^4.0.0:
   resolved "https://registry.yarnpkg.com/cosmiconfig-typescript-loader/-/cosmiconfig-typescript-loader-4.1.0.tgz#39b2f8e302d587d27a2d5fc10106635abef4a6e4"
   integrity sha512-HbWIuR5O+XO5Oj9SZ5bzgrD4nN+rfhrm2PMb0FVx+t+XIvC45n8F0oTNnztXtspWGw0i2IzHaUWFD5LzV1JB4A==
 
-cosmiconfig@*, cosmiconfig@^7.0.0, cosmiconfig@^7.0.1:
+cosmiconfig@*, cosmiconfig@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-8.0.0.tgz#e9feae014eab580f858f8a0288f38997a7bebe97"
+  integrity sha512-da1EafcpH6b/TD8vDRaWV7xFINlHlF6zKsGwS1TsuVJTZRkquaS5HTMq7uq6h31619QjbsYl21gVDOm32KM1vQ==
+  dependencies:
+    import-fresh "^3.2.1"
+    js-yaml "^4.1.0"
+    parse-json "^5.0.0"
+    path-type "^4.0.0"
+
+cosmiconfig@^7.0.0:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-7.0.1.tgz#714d756522cace867867ccb4474c5d01bbae5d6d"
   integrity sha512-a1YWNUV2HwGimB7dU2s1wUMurNKjpx60HxBB6xUM8Re+2s1g1IIfJvFR0/iCF+XHdE0GMTKTuLR32UQff4TEyQ==
