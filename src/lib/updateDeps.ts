@@ -286,7 +286,7 @@ export const updateManifestDeps = (pkg: Package): void => {
     const release = d._nextRelease ?? d._lastRelease
 
     // Cannot establish version.
-    if (!release || !release.version) {
+    if (!release?.version) {
       throw Error(
         `Cannot release because dependency ${d.name} has not been released`,
       )
