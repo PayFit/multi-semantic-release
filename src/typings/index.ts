@@ -82,7 +82,7 @@ export interface BaseMultiContext {
   // The current working directory.
   cwd: string
   // The environment variables.
-  env: { [name: string]: string }
+  env: Record<string, string>
   // The output stream for this multirelease.
   stdout: WriteStream
   // The error stream for this multirelease.

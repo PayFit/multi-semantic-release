@@ -30,7 +30,7 @@ export default async function multiSemanticRelease(
   inputOptions: Options = {},
   {
     cwd = process.cwd(),
-    env = process.env as { [name: string]: string },
+    env = process.env as Record<string, string>,
     stdout = process.stdout,
     stderr = process.stderr,
   } = {},
