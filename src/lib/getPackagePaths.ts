@@ -44,7 +44,7 @@ export default function getPackagePaths(
   }
 
   // Turn workspaces into list of package.json files.
-  const workspacePackages = globby.sync(
+  const workspacePackages = globby.globbySync(
     packages.map((p: string) => p.replace(/\/?$/, '/package.json')),
     {
       cwd,
