@@ -2,10 +2,10 @@ import { writeFileSync } from 'fs'
 import semver, { ReleaseType } from 'semver'
 import debugFactory from 'debug'
 
-import { BaseMultiContext, Package } from '../typings'
+import { BaseMultiContext, Package } from '../typings/index.js'
 
-import recognizeFormat from './recognizeFormat'
-import getManifest from './getManifest'
+import recognizeFormat from './recognizeFormat.js'
+import getManifest from './getManifest.js'
 
 const debug = debugFactory('msr:updateDeps')
 
@@ -281,14 +281,16 @@ export const updateManifestDeps = (pkg: Package): void => {
   const { indent, trailingWhitespace } = recognizeFormat(manifest.__contents__)
 
   // Loop through localDeps to verify release consistency.
-  pkg.localDeps.forEach(d => {
+  pkg.localDeps.forEach((d: any) => {
     // Get version of dependency.
     const release = d._nextRelease ?? d._lastRelease
 
     // Cannot establish version.
     if (!release?.version) {
       throw Error(
-        `Cannot release because dependency ${d.name} has not been released`,
+        `Cannot release because dependency ${
+          d.name as string
+        } has not been released`,
       )
     }
   })

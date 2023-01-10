@@ -1,10 +1,16 @@
 import tempy from 'tempy'
 import { WritableStreamBuffer } from 'stream-buffers'
+import { jest } from '@jest/globals'
 
-import multiSemanticRelease from '../../lib/multiSemanticRelease'
-import { copyDirectory, createNewTestingFiles } from '../helpers/file'
-import { gitInit, gitCommitAll, gitInitOrigin, gitPush } from '../helpers/git'
-import { getTags } from '../../lib/git'
+import multiSemanticRelease from '../../lib/multiSemanticRelease.js'
+import { copyDirectory, createNewTestingFiles } from '../helpers/file.js'
+import {
+  gitInit,
+  gitCommitAll,
+  gitInitOrigin,
+  gitPush,
+} from '../helpers/git.js'
+import { getTags } from '../../lib/git.js'
 
 jest.setTimeout(50000)
 

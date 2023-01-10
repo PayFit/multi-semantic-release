@@ -1,5 +1,5 @@
 import { isAbsolute, join, normalize } from 'path'
-import { check } from './blork'
+import { check } from './blork.js'
 
 /**
  * Normalize and make a path absolute, optionally using a custom CWD.

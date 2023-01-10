@@ -9,11 +9,11 @@ import {
   Package,
   PluginOption,
   VerifyConditionsContext,
-} from '../typings'
+} from '../typings/index.js'
 
-import getCommitsFiltered from './getCommitsFiltered'
-import { getTagHead } from './git'
-import { resolveReleaseType, updateManifestDeps } from './updateDeps'
+import getCommitsFiltered from './getCommitsFiltered.js'
+import { getTagHead } from './git.js'
+import { resolveReleaseType, updateManifestDeps } from './updateDeps.js'
 
 const debug = debugFactory('msr:inlinePlugin')
 

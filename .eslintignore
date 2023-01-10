@@ -1,6 +1,6 @@
 node_modules
 dist
 coverage
-commitlint.config.js
-.eslintrc.js
-jest.config.js
+commitlint.config.cjs
+.eslintrc.cjs
+jest.config.cjs

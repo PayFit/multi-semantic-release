@@ -1,4 +1,4 @@
-import recognizeFormat from '../../lib/recognizeFormat'
+import recognizeFormat from '../../lib/recognizeFormat.js'
 
 // Tests.
 describe('recognizeFormat()', () => {

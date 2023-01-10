@@ -1,9 +1,6 @@
-import semrelPkgJson from 'semantic-release/package.json'
-
-import getPackagePaths from '../lib/getPackagePaths'
-import multiSemanticRelease from '../lib/multiSemanticRelease'
-
 import debugFactory from 'debug'
+import getPackagePaths from '../lib/getPackagePaths.js'
+import multiSemanticRelease from '../lib/multiSemanticRelease.js'
 
 export default (flags: Record<string, any>) => {
   if (flags.debug) {
@@ -15,7 +12,6 @@ export default (flags: Record<string, any>) => {
 
   // Catch errors.
   try {
-    console.log(`semantic-release version: ${semrelPkgJson.version}`)
     console.log(`flags: ${JSON.stringify(flags, null, 2)}`)
 
     // Get list of package.json paths according to workspaces.
@@ -28,7 +24,7 @@ export default (flags: Record<string, any>) => {
         // Success.
         process.exit(0)
       },
-      error => {
+      (error: any) => {
         // Log out errors.
         console.error(`[multi-semantic-release]:`, error)
         process.exit(1)

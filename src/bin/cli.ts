@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 import meow from 'meow'
-import { toPairs, set } from 'lodash'
+import { toPairs, set } from 'lodash-es'
 
-import runner from './runner'
-import { Flags } from '../typings'
+import runner from './runner.js'
+import { Flags } from '../typings/index.js'
 
 const cli = meow(
   `

@@ -3,7 +3,7 @@ import {
   getLowestVersion,
   getLatestVersion,
   tagsToVersions,
-} from '../../lib/utils'
+} from '../../lib/utils.js'
 
 describe('tagsToVersions()', () => {
   // prettier-ignore

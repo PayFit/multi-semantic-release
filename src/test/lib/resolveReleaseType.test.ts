@@ -1,5 +1,5 @@
-import { resolveReleaseType } from '../../lib/updateDeps'
-import { BaseMultiContext, Package } from '../../typings'
+import { resolveReleaseType } from '../../lib/updateDeps.js'
+import { BaseMultiContext, Package } from '../../typings/index.js'
 
 // Tests.
 describe('resolveReleaseType()', () => {

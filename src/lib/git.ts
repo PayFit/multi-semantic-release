@@ -1,4 +1,4 @@
-import execa, { SyncOptions } from 'execa'
+import { SyncOptions, execa, execaSync } from 'execa'
 
 /**
  * Get all the tags for a given branch.
@@ -16,7 +16,7 @@ export function getTags(
   execaOptions: SyncOptions = {},
   filters?: string[],
 ): string[] {
-  const stringTags = execa.sync(
+  const stringTags = execaSync(
     'git',
     ['tag', '--merged', branch],
     execaOptions,

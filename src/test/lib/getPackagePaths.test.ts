@@ -1,11 +1,15 @@
 /* eslint-disable n/no-path-concat */
 import { resolve } from 'path'
-import getPackagePaths from '../../lib/getPackagePaths'
+import { fileURLToPath } from 'url'
+
+import getPackagePaths from '../../lib/getPackagePaths.js'
 
 // Tests.
 describe('getPackagePaths()', () => {
   test('yarn: Works correctly with workspaces', () => {
-    const resolved = resolve(`${__dirname}/../fixtures/yarnWorkspaces`)
+    const resolved = resolve(
+      fileURLToPath(new URL('../fixtures/yarnWorkspaces', import.meta.url)),
+    )
     expect(getPackagePaths(resolved)).toEqual([
       `${resolved}/packages/a/package.json`,
       `${resolved}/packages/b/package.json`,
@@ -14,7 +18,11 @@ describe('getPackagePaths()', () => {
     ])
   })
   test('yarn: Should ignore some packages', () => {
-    const resolved = resolve(`${__dirname}/../fixtures/yarnWorkspacesIgnore`)
+    const resolved = resolve(
+      fileURLToPath(
+        new URL('../fixtures/yarnWorkspacesIgnore', import.meta.url),
+      ),
+    )
     expect(getPackagePaths(resolved)).toEqual([
       `${resolved}/packages/a/package.json`,
       `${resolved}/packages/b/package.json`,
@@ -22,7 +30,9 @@ describe('getPackagePaths()', () => {
     ])
 
     const resolvedSplit = resolve(
-      `${__dirname}/../fixtures/yarnWorkspacesIgnoreSplit`,
+      fileURLToPath(
+        new URL('../fixtures/yarnWorkspacesIgnoreSplit', import.meta.url),
+      ),
     )
     expect(getPackagePaths(resolvedSplit)).toEqual([
       `${resolvedSplit}/packages/a/package.json`,
@@ -30,13 +40,19 @@ describe('getPackagePaths()', () => {
     ])
   })
   test('yarn: Should ignore some packages via CLI', () => {
-    const resolved = resolve(`${__dirname}/../fixtures/yarnWorkspacesIgnore`)
+    const resolved = resolve(
+      fileURLToPath(
+        new URL('../fixtures/yarnWorkspacesIgnore', import.meta.url),
+      ),
+    )
     expect(
       getPackagePaths(resolved, ['packages/a/**', 'packages/b/**']),
     ).toEqual([`${resolved}/packages/c/package.json`])
 
     const resolvedSplit = resolve(
-      `${__dirname}/../fixtures/yarnWorkspacesIgnoreSplit`,
+      fileURLToPath(
+        new URL('../fixtures/yarnWorkspacesIgnoreSplit', import.meta.url),
+      ),
     )
     expect(
       getPackagePaths(resolvedSplit, ['packages/b', 'packages/d']),
@@ -46,7 +62,11 @@ describe('getPackagePaths()', () => {
     ])
   })
   test('yarn: Should throw when ignored packages from CLI and workspaces sets an empty workspace list to be processed', () => {
-    const resolved = resolve(`${__dirname}/../fixtures/yarnWorkspacesIgnore`)
+    const resolved = resolve(
+      fileURLToPath(
+        new URL('../fixtures/yarnWorkspacesIgnore', import.meta.url),
+      ),
+    )
     expect(() =>
       getPackagePaths(resolved, [
         'packages/a/**',
@@ -65,14 +85,22 @@ describe('getPackagePaths()', () => {
     )
   })
   test('yarn: Error if no workspaces setting', () => {
-    const resolved = resolve(`${__dirname}/../fixtures/emptyYarnWorkspaces`)
+    const resolved = resolve(
+      fileURLToPath(
+        new URL('../fixtures/emptyYarnWorkspaces', import.meta.url),
+      ),
+    )
     expect(() => getPackagePaths(resolved)).toThrow(Error)
     expect(() => getPackagePaths(resolved)).toThrow(
       'contain one or more workspace-packages',
     )
   })
   test('yarn: Works correctly with workspaces.packages', () => {
-    const resolved = resolve(`${__dirname}/../fixtures/yarnWorkspacesPackages`)
+    const resolved = resolve(
+      fileURLToPath(
+        new URL('../fixtures/yarnWorkspacesPackages', import.meta.url),
+      ),
+    )
     expect(getPackagePaths(resolved)).toEqual([
       `${resolved}/packages/a/package.json`,
       `${resolved}/packages/b/package.json`,
@@ -81,7 +109,9 @@ describe('getPackagePaths()', () => {
     ])
   })
   test('pnpm: Works correctly with workspace', () => {
-    const resolved = resolve(`${__dirname}/../fixtures/pnpmWorkspace`)
+    const resolved = resolve(
+      fileURLToPath(new URL('../fixtures/pnpmWorkspace', import.meta.url)),
+    )
     expect(getPackagePaths(resolved)).toEqual([
       `${resolved}/packages/a/package.json`,
       `${resolved}/packages/b/package.json`,
@@ -90,14 +120,22 @@ describe('getPackagePaths()', () => {
     ])
   })
   test('pnpm: Error if no workspaces setting', () => {
-    const resolved = resolve(`${__dirname}/../fixtures/pnpmWorkspaceUndefined`)
+    const resolved = resolve(
+      fileURLToPath(
+        new URL('../fixtures/pnpmWorkspaceUndefined', import.meta.url),
+      ),
+    )
     expect(() => getPackagePaths(resolved)).toThrow(Error)
     expect(() => getPackagePaths(resolved)).toThrow(
       'contain one or more workspace-packages',
     )
   })
   test('pnpm: Should ignore some packages', () => {
-    const resolved = resolve(`${__dirname}/../fixtures/pnpmWorkspaceIgnore`)
+    const resolved = resolve(
+      fileURLToPath(
+        new URL('../fixtures/pnpmWorkspaceIgnore', import.meta.url),
+      ),
+    )
     expect(getPackagePaths(resolved)).toEqual([
       `${resolved}/packages/a/package.json`,
       `${resolved}/packages/b/package.json`,
@@ -105,13 +143,19 @@ describe('getPackagePaths()', () => {
     ])
   })
   test('pnpm: Should ignore some packages via CLI', () => {
-    const resolved = resolve(`${__dirname}/../fixtures/pnpmWorkspaceIgnore`)
+    const resolved = resolve(
+      fileURLToPath(
+        new URL('../fixtures/pnpmWorkspaceIgnore', import.meta.url),
+      ),
+    )
     expect(
       getPackagePaths(resolved, ['packages/a/**', 'packages/b/**']),
     ).toEqual([`${resolved}/packages/c/package.json`])
   })
   test('bolt: Works correctly with workspaces', () => {
-    const resolved = resolve(`${__dirname}/../fixtures/boltWorkspaces`)
+    const resolved = resolve(
+      fileURLToPath(new URL('../fixtures/boltWorkspaces', import.meta.url)),
+    )
     expect(getPackagePaths(resolved)).toEqual([
       `${resolved}/packages/a/package.json`,
       `${resolved}/packages/b/package.json`,
@@ -120,14 +164,22 @@ describe('getPackagePaths()', () => {
     ])
   })
   test('bolt: Error if no workspaces setting', () => {
-    const resolved = resolve(`${__dirname}/../fixtures/boltWorkspacesUndefined`)
+    const resolved = resolve(
+      fileURLToPath(
+        new URL('../fixtures/boltWorkspacesUndefined', import.meta.url),
+      ),
+    )
     expect(() => getPackagePaths(resolved)).toThrow(Error)
     expect(() => getPackagePaths(resolved)).toThrow(
       'contain one or more workspace-packages',
     )
   })
   test('bolt: Should ignore some packages', () => {
-    const resolved = resolve(`${__dirname}/../fixtures/boltWorkspacesIgnore`)
+    const resolved = resolve(
+      fileURLToPath(
+        new URL('../fixtures/boltWorkspacesIgnore', import.meta.url),
+      ),
+    )
     expect(getPackagePaths(resolved)).toEqual([
       `${resolved}/packages/a/package.json`,
       `${resolved}/packages/b/package.json`,
@@ -135,7 +187,11 @@ describe('getPackagePaths()', () => {
     ])
   })
   test('bolt: Should ignore some packages via CLI', () => {
-    const resolved = resolve(`${__dirname}/../fixtures/boltWorkspacesIgnore`)
+    const resolved = resolve(
+      fileURLToPath(
+        new URL('../fixtures/boltWorkspacesIgnore', import.meta.url),
+      ),
+    )
     expect(
       getPackagePaths(resolved, ['packages/a/**', 'packages/b/**']),
     ).toEqual([`${resolved}/packages/c/package.json`])

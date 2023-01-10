@@ -1,20 +1,20 @@
 import { dirname } from 'path'
 import semanticRelease, { Options } from 'semantic-release'
-import { uniq } from 'lodash'
+import { uniq } from 'lodash-es'
 import { WriteStream } from 'tty'
 import batchingToposort from 'batching-toposort'
 
-import { BaseMultiContext, Flags, Package } from '../typings'
+import { BaseMultiContext, Flags, Package } from '../typings/index.js'
 
-import { check } from './blork'
-import getLogger from './getLogger'
-import getConfig from './getConfig'
-import getConfigSemantic from './getConfigSemantic'
-import getManifest from './getManifest'
-import cleanPath from './cleanPath'
-import RescopedStream from './RescopedStream'
-import createInlinePluginCreator from './createInlinePluginCreator'
-import { isDefined } from './utils'
+import { check } from './blork.js'
+import getLogger from './getLogger.js'
+import getConfig from './getConfig.js'
+import getConfigSemantic from './getConfigSemantic.js'
+import getManifest from './getManifest.js'
+import cleanPath from './cleanPath.js'
+import RescopedStream from './RescopedStream.js'
+import createInlinePluginCreator from './createInlinePluginCreator.js'
+import { isDefined } from './utils.js'
 
 /**
  * Perform a multirelease.

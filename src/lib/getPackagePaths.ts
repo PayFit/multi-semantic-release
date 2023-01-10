@@ -1,8 +1,8 @@
 import { Packages, getPackagesSync } from '@manypkg/get-packages'
 import path from 'path'
-import globby from 'globby'
+import { globbySync } from 'globby'
 
-import getManifest from './getManifest'
+import getManifest from './getManifest.js'
 
 /**
  * Return array of package.json for workspace packages.
@@ -44,7 +44,7 @@ export default function getPackagePaths(
   }
 
   // Turn workspaces into list of package.json files.
-  const workspacePackages = globby.sync(
+  const workspacePackages = globbySync(
     packages.map((p: string) => p.replace(/\/?$/, '/package.json')),
     {
       cwd,

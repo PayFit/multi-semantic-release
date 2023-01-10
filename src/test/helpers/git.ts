@@ -5,7 +5,7 @@
 
 import { check } from 'blork'
 import tempy from 'tempy'
-import execa from 'execa'
+import { execaSync } from 'execa'
 import fileUrl from 'file-url'
 
 /**
@@ -30,8 +30,8 @@ export function gitInit(branch = 'master'): string {
 
   // Init Git in a temp directory.
   const cwd = tempy.directory()
-  execa.sync('git', ['init'], { cwd })
-  execa.sync('git', ['checkout', '-b', branch], { cwd })
+  execaSync('git', ['init'], { cwd })
+  execaSync('git', ['checkout', '-b', branch], { cwd })
 
   // Disable GPG signing for commits.
   gitConfig(cwd, 'commit.gpgsign', 'false')
@@ -49,7 +49,7 @@ export function gitInit(branch = 'master'): string {
 export function gitInitRemote(): string {
   // Init bare Git repository in a temp directory.
   const cwd = tempy.directory()
-  execa.sync('git', ['init', '--bare'], { cwd })
+  execaSync('git', ['init', '--bare'], { cwd })
 
   // Turn remote path into a file URL.
   const url = fileUrl(cwd)
@@ -74,15 +74,15 @@ export function gitInitOrigin(cwd: string, releaseBranch?: string): string {
   const url = gitInitRemote()
 
   // Set origin on local repo.
-  execa.sync('git', ['remote', 'add', 'origin', url], { cwd })
+  execaSync('git', ['remote', 'add', 'origin', url], { cwd })
 
   // Set up a release branch. Return to master afterwards.
   if (releaseBranch) {
-    execa.sync('git', ['checkout', '-b', releaseBranch], { cwd })
-    execa.sync('git', ['checkout', 'master'], { cwd })
+    execaSync('git', ['checkout', '-b', releaseBranch], { cwd })
+    execaSync('git', ['checkout', 'master'], { cwd })
   }
 
-  execa.sync('git', ['push', '--all', 'origin'], { cwd })
+  execaSync('git', ['push', '--all', 'origin'], { cwd })
 
   // Return URL for remote.
   return url
@@ -102,7 +102,7 @@ export function gitAdd(cwd: string, file = '.') {
   check(cwd, 'cwd: absolute')
 
   // Await command.
-  execa.sync('git', ['add', file], { cwd })
+  execaSync('git', ['add', file], { cwd })
 }
 
 // Commits.
@@ -121,7 +121,7 @@ export function gitCommit(cwd: string, message: string): string {
   check(message, 'message: string+')
 
   // Await the command.
-  execa.sync('git', ['commit', '-m', message, '--no-gpg-sign'], { cwd })
+  execaSync('git', ['commit', '-m', message, '--no-gpg-sign'], { cwd })
 
   // Return HEAD SHA.
   return gitGetHead(cwd)
@@ -165,7 +165,7 @@ export function gitPush(cwd: string, remote = 'origin', branch = 'master') {
   check(branch, 'branch: lower')
 
   // Await command.
-  execa.sync('git', ['push', '--tags', remote, `HEAD:${branch}`], { cwd })
+  execaSync('git', ['push', '--tags', remote, `HEAD:${branch}`], { cwd })
 }
 
 // Branches.
@@ -183,7 +183,7 @@ export function gitBranch(cwd: string, branch: string) {
   check(branch, 'branch: lower')
 
   // Await command.
-  execa.sync('git', ['branch', branch], { cwd })
+  execaSync('git', ['branch', branch], { cwd })
 }
 
 /**
@@ -199,7 +199,7 @@ export function gitCheckout(cwd: string, branch: string) {
   check(branch, 'branch: lower')
 
   // Await command.
-  execa.sync('git', ['checkout', branch], { cwd })
+  execaSync('git', ['checkout', branch], { cwd })
 }
 
 // Hashes.
@@ -215,7 +215,7 @@ export function gitGetHead(cwd: string) {
   check(cwd, 'cwd: absolute')
 
   // Await command and return HEAD SHA.
-  return execa.sync('git', ['rev-parse', 'HEAD'], { cwd }).stdout
+  return execaSync('git', ['rev-parse', 'HEAD'], { cwd }).stdout
 }
 
 // Tags.
@@ -235,7 +235,7 @@ export function gitTag(cwd: string, tagName: string, hash?: string) {
   check(hash, 'hash: alphanumeric{40}?')
 
   // Run command.
-  execa.sync('git', hash ? ['tag', '-f', tagName, hash] : ['tag', tagName], {
+  execaSync('git', hash ? ['tag', '-f', tagName, hash] : ['tag', tagName], {
     cwd,
   })
 }
@@ -253,7 +253,7 @@ export function gitGetTags(cwd: string, hash: string) {
   check(hash, 'hash: alphanumeric{40}')
 
   // Run command.
-  return execa.sync('git', ['describe', '--tags', '--exact-match', hash], {
+  return execaSync('git', ['describe', '--tags', '--exact-match', hash], {
     cwd,
   }).stdout
 }
@@ -271,7 +271,7 @@ export function gitGetTagHash(cwd: string, tagName: string) {
   check(tagName, 'tagName: string+')
 
   // Run command.
-  return execa.sync('git', ['rev-list', '-1', tagName], { cwd }).stdout
+  return execaSync('git', ['rev-list', '-1', tagName], { cwd }).stdout
 }
 
 // Configs.
@@ -290,7 +290,7 @@ export function gitConfig(cwd: string, name: string, value: string) {
   check(name, 'name: string+')
 
   // Run command.
-  execa.sync('git', ['config', '--add', name, value], { cwd })
+  execaSync('git', ['config', '--add', name, value], { cwd })
 }
 
 /**
@@ -306,5 +306,5 @@ export function gitGetConfig(cwd: string, name: string) {
   check(name, 'name: string+')
 
   // Run command.
-  return execa.sync('git', ['config', name], { cwd }).stdout
+  return execaSync('git', ['config', name], { cwd }).stdout
 }

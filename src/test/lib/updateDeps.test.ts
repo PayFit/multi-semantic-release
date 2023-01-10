@@ -1,7 +1,7 @@
 import { ReleaseType } from 'semver'
 
-import { resolveReleaseType, resolveNextVersion } from '../../lib/updateDeps'
-import { BaseMultiContext, Package } from '../../typings'
+import { resolveReleaseType, resolveNextVersion } from '../../lib/updateDeps.js'
+import { BaseMultiContext, Package } from '../../typings/index.js'
 
 describe('resolveNextVersion()', () => {
   // prettier-ignore

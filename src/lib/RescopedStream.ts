@@ -1,6 +1,6 @@
 import { Writable } from 'stream'
 
-import { check } from './blork'
+import { check } from './blork.js'
 
 /**
  * Create a stream that passes messages through while rewriting scope.

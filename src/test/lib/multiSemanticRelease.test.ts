@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { writeFileSync } from 'fs'
+import { writeFileSync, readFileSync } from 'fs'
 import { WritableStreamBuffer } from 'stream-buffers'
+import { jest } from '@jest/globals'
 
-import multiSemanticRelease from '../../lib/multiSemanticRelease'
-import { copyDirectory, createNewTestingFiles } from '../helpers/file'
+import multiSemanticRelease from '../../lib/multiSemanticRelease.js'
+import { copyDirectory, createNewTestingFiles } from '../helpers/file.js'
 import {
   gitInit,
   gitAdd,
@@ -12,14 +13,13 @@ import {
   gitInitOrigin,
   gitPush,
   gitTag,
-} from '../helpers/git'
+} from '../helpers/git.js'
 
 jest.setTimeout(30000)
 
 // Clear mocks before tests.
 beforeEach(() => {
   jest.clearAllMocks() // Clear all mocks.
-  require.cache = {} // Clear the require cache so modules are loaded fresh.
 })
 
 // Tests.
@@ -135,12 +135,16 @@ describe('multiSemanticRelease()', () => {
     expect(result).toHaveLength(4)
 
     // Check manifests.
-    expect(require(`${cwd}/packages/a/package.json`)).toMatchObject({
+    expect(
+      JSON.parse(readFileSync(`${cwd}/packages/a/package.json`).toString()),
+    ).toMatchObject({
       peerDependencies: {
         'msr-test-c': '^1.0.0',
       },
     })
-    expect(require(`${cwd}/packages/b/package.json`)).toMatchObject({
+    expect(
+      JSON.parse(readFileSync(`${cwd}/packages/b/package.json`).toString()),
+    ).toMatchObject({
       dependencies: {
         'msr-test-a': '1.0.0',
       },
@@ -148,7 +152,9 @@ describe('multiSemanticRelease()', () => {
         'msr-test-c': '1.0.0',
       },
     })
-    expect(require(`${cwd}/packages/c/package.json`)).toMatchObject({
+    expect(
+      JSON.parse(readFileSync(`${cwd}/packages/c/package.json`).toString()),
+    ).toMatchObject({
       devDependencies: {
         'msr-test-d': '1.0.0',
       },
@@ -276,12 +282,16 @@ describe('multiSemanticRelease()', () => {
     expect(result).toHaveLength(4)
 
     // Check manifests.
-    expect(require(`${cwd}/packages/a/package.json`)).toMatchObject({
+    expect(
+      JSON.parse(readFileSync(`${cwd}/packages/a/package.json`).toString()),
+    ).toMatchObject({
       peerDependencies: {
         'msr-test-c': '^1.0.0-dev.1',
       },
     })
-    expect(require(`${cwd}/packages/b/package.json`)).toMatchObject({
+    expect(
+      JSON.parse(readFileSync(`${cwd}/packages/b/package.json`).toString()),
+    ).toMatchObject({
       dependencies: {
         'msr-test-a': '1.0.0-dev.1',
       },
@@ -289,7 +299,9 @@ describe('multiSemanticRelease()', () => {
         'msr-test-c': '1.0.0-dev.1',
       },
     })
-    expect(require(`${cwd}/packages/c/package.json`)).toMatchObject({
+    expect(
+      JSON.parse(readFileSync(`${cwd}/packages/c/package.json`).toString()),
+    ).toMatchObject({
       devDependencies: {
         'msr-test-d': '1.0.0-dev.1',
       },
@@ -376,7 +388,9 @@ describe('multiSemanticRelease()', () => {
     expect(result).toHaveLength(2)
 
     // Check manifests.
-    expect(require(`${cwd}/packages/c/package.json`)).toMatchObject({
+    expect(
+      JSON.parse(readFileSync(`${cwd}/packages/c/package.json`).toString()),
+    ).toMatchObject({
       dependencies: {
         'msr-test-d': '1.0.0-dev.1',
       },
@@ -478,7 +492,9 @@ describe('multiSemanticRelease()', () => {
     expect(result).toHaveLength(2)
 
     // Check manifests.
-    expect(require(`${cwd}/packages/c/package.json`)).toMatchObject({
+    expect(
+      JSON.parse(readFileSync(`${cwd}/packages/c/package.json`).toString()),
+    ).toMatchObject({
       dependencies: {
         'msr-test-d': '2.0.0-beta.1',
       },
@@ -650,12 +666,16 @@ describe('multiSemanticRelease()', () => {
     expect(result).toHaveLength(4)
 
     // Check manifests.
-    expect(require(`${cwd}/packages/a/package.json`)).toMatchObject({
+    expect(
+      JSON.parse(readFileSync(`${cwd}/packages/a/package.json`).toString()),
+    ).toMatchObject({
       peerDependencies: {
         'msr-test-c': '^1.0.0-dev.2',
       },
     })
-    expect(require(`${cwd}/packages/b/package.json`)).toMatchObject({
+    expect(
+      JSON.parse(readFileSync(`${cwd}/packages/b/package.json`).toString()),
+    ).toMatchObject({
       dependencies: {
         'msr-test-a': '1.0.0-dev.2',
       },
@@ -663,7 +683,9 @@ describe('multiSemanticRelease()', () => {
         'msr-test-c': '1.0.0-dev.2',
       },
     })
-    expect(require(`${cwd}/packages/c/package.json`)).toMatchObject({
+    expect(
+      JSON.parse(readFileSync(`${cwd}/packages/c/package.json`).toString()),
+    ).toMatchObject({
       devDependencies: {
         'msr-test-d': '1.0.0-dev.2',
       },
@@ -825,12 +847,16 @@ describe('multiSemanticRelease()', () => {
     expect(result[4]).toBeUndefined()
 
     // Check manifests.
-    expect(require(`${cwd}/packages/a/package.json`)).toMatchObject({
+    expect(
+      JSON.parse(readFileSync(`${cwd}/packages/a/package.json`).toString()),
+    ).toMatchObject({
       peerDependencies: {
         'msr-test-c': '^1.0.0',
       },
     })
-    expect(require(`${cwd}/packages/b/package.json`)).toMatchObject({
+    expect(
+      JSON.parse(readFileSync(`${cwd}/packages/b/package.json`).toString()),
+    ).toMatchObject({
       dependencies: {
         'msr-test-a': '1.1.0',
       },
@@ -838,7 +864,9 @@ describe('multiSemanticRelease()', () => {
         'msr-test-c': '1.0.0',
       },
     })
-    expect(require(`${cwd}/packages/c/package.json`)).toMatchObject({
+    expect(
+      JSON.parse(readFileSync(`${cwd}/packages/c/package.json`).toString()),
+    ).toMatchObject({
       devDependencies: {
         'msr-test-d': '*',
       },

@@ -1,8 +1,15 @@
-import execa from 'execa'
+import { execa } from 'execa'
 import * as path from 'path'
+import { fileURLToPath } from 'url'
+import { jest } from '@jest/globals'
 
-import { copyDirectory } from '../helpers/file'
-import { gitInit, gitCommitAll, gitInitOrigin, gitPush } from '../helpers/git'
+import { copyDirectory } from '../helpers/file.js'
+import {
+  gitInit,
+  gitCommitAll,
+  gitInitOrigin,
+  gitPush,
+} from '../helpers/git.js'
 
 // Tests are a bit long, let's increase the Jest timeout
 jest.setTimeout(5 * 60 * 1000)
@@ -18,10 +25,14 @@ describe('multi-semantic-release CLI', () => {
     gitPush(cwd)
 
     // Path to CLI command.
-    const filepath = path.resolve(__dirname, `../../bin/cli.ts`)
+    const filepath = path.resolve(
+      fileURLToPath(new URL(`../../bin/cli.ts`, import.meta.url)),
+    )
 
     // Run via command line.
-    const out = (await execa('ts-node', ['--files', filepath], { cwd })).stdout
+    const out = (
+      await execa('ts-node', ['--esm', '--files', filepath], { cwd })
+    ).stdout
     expect(out).toMatch('Started multirelease! Loading 4 packages...')
     expect(out).toMatch('Released 4 of 4 packages, semantically!')
   })
@@ -35,13 +46,20 @@ describe('multi-semantic-release CLI', () => {
     gitPush(cwd)
 
     // Path to CLI command.
-    const filepath = path.resolve(__dirname, `../../bin/cli.ts`)
+    const filepath = path.resolve(
+      fileURLToPath(new URL(`../../bin/cli.ts`, import.meta.url)),
+    )
 
     // Run via command line.
     const out = (
       await execa(
         'ts-node',
-        ['--files', filepath, '--ignore-packages=packages/c/**,packages/d/**'],
+        [
+          '--esm',
+          '--files',
+          filepath,
+          '--ignore-packages=packages/c/**,packages/d/**',
+        ],
         { cwd },
       )
     ).stdout

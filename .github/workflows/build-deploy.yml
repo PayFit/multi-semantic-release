@@ -12,7 +12,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           cache: yarn
-          node-version: '16.x'
+          node-version: '18.x'
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - run: yarn lint
@@ -23,7 +23,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [18.x, 19.x]
 
     steps:
       - uses: actions/checkout@v3
@@ -53,7 +53,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           cache: yarn
-          node-version: '16.x'
+          node-version: '18.x'
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Release

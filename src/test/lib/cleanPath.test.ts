@@ -1,4 +1,4 @@
-import cleanPath from '../../lib/cleanPath'
+import cleanPath from '../../lib/cleanPath.js'
 
 // Tests.
 describe('cleanPath()', () => {

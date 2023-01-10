@@ -1,8 +1,8 @@
 // @ts-expect-error
-import semanticGetConfig from 'semantic-release/lib/get-config'
+import semanticGetConfig from 'semantic-release/lib/get-config.js'
 import { Options } from 'semantic-release'
 
-import { BaseMultiContext } from '../typings'
+import { BaseMultiContext } from '../typings/index.js'
 
 /**
  * Get the release configuration options for a given directory.

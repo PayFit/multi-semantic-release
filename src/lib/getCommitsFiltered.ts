@@ -1,11 +1,11 @@
 import debugFactory from 'debug'
 import { relative } from 'path'
 import gitLogParser, { Commit } from 'git-log-parser'
-import execa from 'execa'
+import { execa } from 'execa'
 import getStream from 'get-stream'
 
-import { ValueError, check } from './blork'
-import cleanPath from './cleanPath'
+import { ValueError, check } from './blork.js'
+import cleanPath from './cleanPath.js'
 
 const debug = debugFactory('msr:commitsFilter')
 

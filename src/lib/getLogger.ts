@@ -1,4 +1,4 @@
-import { Signale } from 'signale'
+import signale from 'signale'
 import { WriteStream } from 'tty'
 
 /**
@@ -20,7 +20,7 @@ export default function getLogger({
   stderr: WriteStream
   scope?: string
 }) {
-  return new Signale({
+  return new signale.Signale({
     config: { displayTimestamp: true, displayLabel: false },
     scope,
     stream: stdout,
