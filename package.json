@@ -37,7 +37,7 @@
     "cosmiconfig": "^8.0.0",
     "debug": "^4.3.2",
     "detect-indent": "^6.1.0",
-    "detect-newline": "^3.1.0",
+    "detect-newline": "^4.0.0",
     "execa": "^6.1.0",
     "get-stream": "^6.0.1",
     "git-log-parser": "^1.2.0",
