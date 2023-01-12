@@ -43,7 +43,7 @@
     "git-log-parser": "^1.2.0",
     "globby": "^13.0.0",
     "lodash-es": "^4.17.21",
-    "meow": "^9.0.0",
+    "meow": "^11.0.0",
     "promise-events": "^0.2.4",
     "semantic-release": "npm:@killianhmyd/semantic-release@0.0.0-notes-fix.9",
     "semver": "^7.3.5",
