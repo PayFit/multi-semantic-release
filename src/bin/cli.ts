@@ -26,6 +26,7 @@ const cli = meow(
 	$ multi-semantic-release --ignore-packages=packages/a/**,packages/b/**
 `,
   {
+    importMeta: import.meta,
     flags: {
       firstParent: {
         type: 'boolean',
