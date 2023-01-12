@@ -4,7 +4,7 @@
  */
 
 import { check } from 'blork'
-import tempy from 'tempy'
+import { temporaryDirectory } from 'tempy'
 import { execaSync } from 'execa'
 import fileUrl from 'file-url'
 
@@ -29,7 +29,7 @@ export function gitInit(branch = 'master'): string {
   check(branch, 'branch: kebab')
 
   // Init Git in a temp directory.
-  const cwd = tempy.directory()
+  const cwd = temporaryDirectory()
   execaSync('git', ['init'], { cwd })
   execaSync('git', ['checkout', '-b', branch], { cwd })
 
@@ -48,7 +48,7 @@ export function gitInit(branch = 'master'): string {
  */
 export function gitInitRemote(): string {
   // Init bare Git repository in a temp directory.
-  const cwd = tempy.directory()
+  const cwd = temporaryDirectory()
   execaSync('git', ['init', '--bare'], { cwd })
 
   // Turn remote path into a file URL.
