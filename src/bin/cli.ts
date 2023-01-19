@@ -48,6 +48,10 @@ const cli = meow(
       dryRun: {
         type: 'boolean',
       },
+      concurrent: {
+        type: 'boolean',
+        default: false,
+      },
     },
   },
 )

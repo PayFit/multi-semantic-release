@@ -1,8 +1,9 @@
 import debugFactory from 'debug'
 import getPackagePaths from '../lib/getPackagePaths.js'
 import multiSemanticRelease from '../lib/multiSemanticRelease.js'
+import { Flags } from '../typings/index.js'
 
-export default (flags: Record<string, any>) => {
+export default (flags: Flags) => {
   if (flags.debug) {
     debugFactory.enable('msr:*')
   }

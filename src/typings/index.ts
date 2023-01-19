@@ -110,6 +110,7 @@ export interface Flags extends Record<string, any> {
     bump?: string
     release?: ReleaseType | 'inherit'
   }
+  concurrent?: boolean
 }
 
 export interface VerifyConditionsContext extends Context {
