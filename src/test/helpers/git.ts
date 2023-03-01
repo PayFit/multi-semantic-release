@@ -30,6 +30,9 @@ export function gitInit(branch = 'master'): string {
 
   // Init Git in a temp directory.
   const cwd = temporaryDirectory()
+  execaSync('git', ['config', '--global', 'init.defaultBranch', branch], {
+    cwd,
+  })
   execaSync('git', ['init'], { cwd })
   execaSync('git', ['checkout', '-b', branch], { cwd })
 
