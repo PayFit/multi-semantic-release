@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import debugFactory from 'debug'
 import { Config, Context } from 'semantic-release'
+import { Mutex } from 'async-mutex'
 
 import {
   AnalyzeCommitsContext,
@@ -35,6 +36,8 @@ export default function createInlinePluginCreator(
 ) {
   // Vars.
   const { cwd } = multiContext
+
+  const mutex = new Mutex()
 
   /**
    * Create an inline plugin for an individual package in a multirelease.
@@ -237,10 +240,13 @@ export default function createInlinePluginCreator(
 
       debug('prepared: %s', pkg.name)
 
+      await mutex.acquire()
+
       return res
     }
 
     const publish = async (pluginOptions: Config, context: Context) => {
+      mutex.release()
       next()
 
       const res = await plugins.publish(context)
