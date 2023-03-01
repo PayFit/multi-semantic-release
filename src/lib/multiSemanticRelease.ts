@@ -93,6 +93,7 @@ export default async function multiSemanticRelease(
   try {
     const batches = batchingToposort(pkgDag)
     for (const batch of batches) {
+      let isErrorOnBatch = false
       const promises: Array<Promise<void>> = []
       for (const pkgName of batch) {
         const pkg = packages.find(_pkg => _pkg.name === pkgName)
@@ -102,13 +103,24 @@ export default async function multiSemanticRelease(
 
         if (flags.concurrent) {
           promises.push(
-            releasePackage(pkg, createInlinePlugin, multiContext, flags),
+            releasePackage(pkg, createInlinePlugin, multiContext, flags).catch(
+              err => {
+                logger.error(err)
+                logger.error(`Error occured on ${pkgName}`)
+                isErrorOnBatch = true
+              },
+            ),
           )
         } else {
           await releasePackage(pkg, createInlinePlugin, multiContext, flags)
         }
       }
       await Promise.all(promises)
+      if (isErrorOnBatch) {
+        throw new Error(
+          'An error occured during the batch, stopping next batch to run',
+        )
+      }
     }
 
     const released = packages.filter(pkg => pkg.result).length
