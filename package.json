@@ -78,7 +78,7 @@
     "eslint-plugin-promise": "6.1.1",
     "file-url": "4.0.0",
     "husky": "8.0.3",
-    "jest": "29.4.3",
+    "jest": "29.5.0",
     "lint-staged": "13.1.2",
     "prettier": "2.8.4",
     "tempy": "3.0.0",
