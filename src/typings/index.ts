@@ -1,4 +1,4 @@
-import { CoreProperties } from '@schemastore/package'
+import { JSONSchemaForNPMPackageJsonFiles } from '@schemastore/package'
 import {
   BranchSpec,
   Commit,
@@ -40,7 +40,7 @@ export interface Package {
   // The result of semantic-release (object with lastRelease, nextRelease, commits, releases), false if this package was skipped (no changes or similar), or undefined if the package's release hasn't completed yet.
   result?: Result
   // The manifest read from the `package.json` of the package
-  manifest: CoreProperties
+  manifest: JSONSchemaForNPMPackageJsonFiles
   // The semantic release options use to release the package
   options: Options & { _pkgOptions: Options }
   // The semantic release plugins

@@ -1,5 +1,5 @@
 import { existsSync, lstatSync, readFileSync } from 'fs'
-import { CoreProperties } from '@schemastore/package'
+import { JSONSchemaForNPMPackageJsonFiles } from '@schemastore/package'
 
 /**
  * Read the content of target package.json if exists.
@@ -46,12 +46,14 @@ function readManifest(path: string): string {
  *
  * @internal
  */
-export default function getManifest(path: string): CoreProperties {
+export default function getManifest(
+  path: string,
+): JSONSchemaForNPMPackageJsonFiles {
   // Read the file.
   const contents = readManifest(path)
 
   // Parse the file.
-  let manifest: CoreProperties
+  let manifest: JSONSchemaForNPMPackageJsonFiles
   try {
     manifest = JSON.parse(contents)
   } catch (_) {

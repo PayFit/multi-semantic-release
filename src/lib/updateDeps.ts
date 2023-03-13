@@ -10,13 +10,15 @@ import getManifest from './getManifest.js'
 const debug = debugFactory('msr:updateDeps')
 
 const getManifestDifference = (
-  newManifest: Record<string, string> = {},
-  oldManifest: Record<string, string> = {},
+  newManifest: Record<string, string | undefined> = {},
+  oldManifest: Record<string, string | undefined> = {},
 ): Record<string, string> => {
   return Object.entries(newManifest).reduce<Record<string, string>>(
     (acc, [key, value]) => {
       if (value !== oldManifest[key]) {
-        acc[key] = `${oldManifest[key]} → ${value}`
+        acc[key] = `${oldManifest[key] ?? 'undefined'} → ${
+          value ?? 'undefined'
+        }`
       }
 
       return acc
