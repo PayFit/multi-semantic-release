@@ -73,7 +73,7 @@
     "eslint-config-standard-with-typescript": "26.0.0",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-jest": "27.2.1",
-    "eslint-plugin-n": "15.6.1",
+    "eslint-plugin-n": "15.7.0",
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-promise": "6.1.1",
     "file-url": "4.0.0",
