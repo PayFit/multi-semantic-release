@@ -46,7 +46,7 @@
     "lodash-es": "^4.17.21",
     "meow": "^11.0.0",
     "promise-events": "^0.2.4",
-    "semantic-release": "npm:@killianhmyd/semantic-release@0.0.0-notes-fix.9",
+    "semantic-release": "npm:@killianhmyd/semantic-release@0.0.0-notes-fix.10",
     "semver": "^7.3.5",
     "signale": "^1.4.0",
     "stream-buffers": "^3.0.2"
