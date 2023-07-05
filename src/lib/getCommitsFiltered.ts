@@ -2,7 +2,7 @@ import debugFactory from 'debug'
 import { relative } from 'path'
 import gitLogParser, { Commit } from 'git-log-parser'
 import { execa } from 'execa'
-import getStream from 'get-stream'
+import { Stream } from 'node:stream'
 
 import { ValueError, check } from './blork.js'
 import cleanPath from './cleanPath.js'
@@ -16,6 +16,21 @@ Object.assign(gitLogParser.fields, {
   gitTags: 'd',
   committerDate: { key: 'ci', type: Date },
 })
+
+async function streamToCommits(stream: Stream): Promise<Commit[]> {
+  const chunks: Commit[] = []
+  return await new Promise((resolve, reject) => {
+    stream.on('data', commit => {
+      chunks.push(commit)
+    })
+    stream.on('error', err => {
+      reject(err)
+    })
+    stream.on('end', () => {
+      resolve(chunks)
+    })
+  })
+}
 
 /**
  * Retrieve the list of commits on the current branch since the commit sha associated with the last release, or all the commits of the current branch if there is no last released version.
@@ -72,7 +87,8 @@ export default async function getCommitsFiltered(
     { _: gitLogFilterQuery },
     { cwd, env: process.env },
   )
-  const commits = await getStream.array<Commit>(stream)
+
+  const commits = await streamToCommits(stream)
 
   // Trim message and tags.
   commits.forEach(commit => {
