@@ -64,6 +64,10 @@ describe('multiSemanticRelease()', () => {
     expect(out).toMatch('Created tag msr-test-c@1.0.0')
     expect(out).toMatch('Created tag msr-test-d@1.0.0')
     expect(out).toMatch('Released 4 of 4 packages, semantically!')
+    expect(out).toMatch('Released package msr-test-a@1.0.0')
+    expect(out).toMatch('Released package msr-test-b@1.0.0')
+    expect(out).toMatch('Released package msr-test-c@1.0.0')
+    expect(out).toMatch('Released package msr-test-d@1.0.0')
 
     // A.
     expect(result[0].name).toBe('msr-test-a')

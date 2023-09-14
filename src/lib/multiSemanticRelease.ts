@@ -1,5 +1,5 @@
 import { dirname } from 'path'
-import semanticRelease, { Options } from 'semantic-release'
+import semanticRelease, { Options, Result } from 'semantic-release'
 import { uniq } from 'lodash-es'
 import { WriteStream } from 'tty'
 import batchingToposort from 'batching-toposort'
@@ -111,12 +111,19 @@ export default async function multiSemanticRelease(
       await Promise.all(promises)
     }
 
-    const released = packages.filter(pkg => pkg.result).length
+    const releasePackages = packages.filter(pkg => pkg.result)
 
     // Return packages list.
     logger.complete(
-      `Released ${released} of ${packages.length} packages, semantically!`,
+      `Released ${releasePackages.length} of ${packages.length} packages, semantically!`,
     )
+    releasePackages.forEach(pkg => {
+      logger.complete(
+        `Released package ${
+          (pkg.result as Exclude<Result, false>).nextRelease.gitTag
+        }`,
+      )
+    })
     return packages
   } catch (err: any) {
     if (err.message?.startsWith('Cycle(s) detected;')) {
