@@ -5,9 +5,9 @@ module.exports = {
   root: true,
   extends: [
     'standard-with-typescript',
-    'plugin:jest/recommended',
-    'plugin:jest/style',
     'prettier',
+    'plugin:vitest-globals/recommended',
+    'plugin:vitest/recommended',
   ],
   plugins: ['@typescript-eslint'],
   parser: '@typescript-eslint/parser',
@@ -18,7 +18,7 @@ module.exports = {
     project: './tsconfig.json',
   },
   env: {
-    jest: true,
+    'vitest-globals/env': true,
     node: true,
   },
   rules: {

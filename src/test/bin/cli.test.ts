@@ -1,7 +1,6 @@
 import { execa } from 'execa'
 import * as path from 'path'
 import { fileURLToPath } from 'url'
-import { jest } from '@jest/globals'
 
 import { copyDirectory } from '../helpers/file.js'
 import {
@@ -11,8 +10,8 @@ import {
   gitPush,
 } from '../helpers/git.js'
 
-// Tests are a bit long, let's increase the Jest timeout
-jest.setTimeout(5 * 60 * 1000)
+// Tests are a bit long, let's increase the vitest timeout
+vi.setConfig({ testTimeout: 5 * 60 * 1000 })
 
 // Tests.
 describe('multi-semantic-release CLI', () => {
