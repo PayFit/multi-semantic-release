@@ -931,15 +931,35 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node12/-/node12-1.0.11.tgz#ee3def1f27d9ed66dac6e46a295cffb0152e058d"
   integrity sha512-cqefuRsh12pWyGsIoBKJA9luFu3mRxCA+ORZvA4ktLSzIuCUtWVxGIuXigEwO5/ywWFMZ2QEGKWvkZG1zDMTag==
 
+"@tsconfig/node14@*":
+  version "14.1.0"
+  resolved "https://registry.yarnpkg.com/@tsconfig/node14/-/node14-14.1.0.tgz#1f8611430002b2a08c68ec1b1e7aa40c03b8fcd2"
+  integrity sha512-VmsCG04YR58ciHBeJKBDNMWWfYbyP8FekWVuTlpstaUPlat1D0x/tXzkWP7yCMU0eSz9V4OZU0LBWTFJ3xZf6w==
+
 "@tsconfig/node14@^1.0.0":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@tsconfig/node14/-/node14-1.0.3.tgz#e4386316284f00b98435bf40f72f75a09dabf6c1"
   integrity sha512-ysT8mhdixWK6Hw3i1V2AeRqZ5WfXg1G43mqoYlM2nc6388Fq5jcXyr5mRsqViLx/GJYdoL0bfXD8nmF+Zn/Iow==
 
+"@tsconfig/node16@*":
+  version "16.1.1"
+  resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-16.1.1.tgz#b9322bcacf7b7a487ab4e078f88455bde47f3780"
+  integrity sha512-+pio93ejHN4nINX4pXqfnR/fPLRtJBaT4ORaa5RH0Oc1zoYmo2B2koG+M328CQhHKn1Wj6FcOxCDFXAot9NhvA==
+
 "@tsconfig/node16@^1.0.2":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.4.tgz#0b92dcc0cc1c81f6f306a381f28e31b1a56536e9"
   integrity sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==
+
+"@tsconfig/node18@*":
+  version "18.2.2"
+  resolved "https://registry.yarnpkg.com/@tsconfig/node18/-/node18-18.2.2.tgz#81fb16ecff0d400b1cbadbf76713b50f331029ce"
+  integrity sha512-d6McJeGsuoRlwWZmVIeE8CUA27lu6jLjvv1JzqmpsytOYYbVi1tHZEnwCNVOXnj4pyLvneZlFlpXUK+X9wBWyw==
+
+"@tsconfig/node20@*":
+  version "20.1.2"
+  resolved "https://registry.yarnpkg.com/@tsconfig/node20/-/node20-20.1.2.tgz#b93128c411d38e9507035255195bc8a6718541e3"
+  integrity sha512-madaWq2k+LYMEhmcp0fs+OGaLFk0OenpHa4gmI4VEmCKX4PJntQ6fnnGADVFrVkBj0wIdAlQnK/MrlYTHsa1gQ==
 
 "@tufjs/canonical-json@1.0.0":
   version "1.0.0"
@@ -6180,7 +6200,24 @@ ts-api-utils@^1.0.1:
   resolved "https://registry.yarnpkg.com/ts-api-utils/-/ts-api-utils-1.0.3.tgz#f12c1c781d04427313dbac808f453f050e54a331"
   integrity sha512-wNMeqtMz5NtwpT/UZGY5alT+VoKdSsOOP/kqHFcUW1P/VRhH2wJ48+DN2WwUliNbQ976ETwDL0Ifd2VVvgonvg==
 
-ts-node@10.9.1, ts-node@^10.8.1:
+ts-node@11.0.0-beta.1:
+  version "11.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-11.0.0-beta.1.tgz#95c4916bf828615a6b9ac9a334135b66479e4f02"
+  integrity sha512-WMSROP+1pU22Q/Tm40mjfRg130yD8i0g6ROST04ZpocfH8sl1zD75ON4XQMcBEVViXMVemJBH0alflE7xePdRA==
+  dependencies:
+    "@cspotcode/source-map-support" "^0.8.0"
+    "@tsconfig/node14" "*"
+    "@tsconfig/node16" "*"
+    "@tsconfig/node18" "*"
+    "@tsconfig/node20" "*"
+    acorn "^8.4.1"
+    acorn-walk "^8.1.1"
+    arg "^4.1.0"
+    diff "^4.0.1"
+    make-error "^1.1.1"
+    v8-compile-cache-lib "^3.0.1"
+
+ts-node@^10.8.1:
   version "10.9.1"
   resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-10.9.1.tgz#e73de9102958af9e1f0b168a6ff320e25adcff4b"
   integrity sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==
