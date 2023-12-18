@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { writeFileSync, readFileSync } from 'fs'
 import { WritableStreamBuffer } from 'stream-buffers'
-import { jest } from '@jest/globals'
 
 import multiSemanticRelease from '../../lib/multiSemanticRelease.js'
 import { copyDirectory, createNewTestingFiles } from '../helpers/file.js'
@@ -15,11 +14,11 @@ import {
   gitTag,
 } from '../helpers/git.js'
 
-jest.setTimeout(30000)
+vi.setConfig({ testTimeout: 30000 })
 
 // Clear mocks before tests.
 beforeEach(() => {
-  jest.clearAllMocks() // Clear all mocks.
+  vi.clearAllMocks() // Clear all mocks.
 })
 
 // Tests.
@@ -1081,13 +1080,13 @@ describe('multiSemanticRelease()', () => {
 
     // Make an inline plugin.
     const plugin: any = {
-      verifyConditions: jest.fn(),
-      analyzeCommits: jest.fn(),
-      verifyRelease: jest.fn(),
-      generateNotes: jest.fn(),
-      prepare: jest.fn(),
-      success: jest.fn(),
-      fail: jest.fn(),
+      verifyConditions: vi.fn(),
+      analyzeCommits: vi.fn(),
+      verifyRelease: vi.fn(),
+      generateNotes: vi.fn(),
+      prepare: vi.fn(),
+      success: vi.fn(),
+      fail: vi.fn(),
     }
 
     // Capture output.
@@ -1179,7 +1178,7 @@ describe('multiSemanticRelease()', () => {
   })
 
   test('ReferenceError if paths points to a non-file', async () => {
-    const stdout = new WritableStreamBuffer() as any // Blackhole the output so it doesn't clutter Jest.
+    const stdout = new WritableStreamBuffer() as any // Blackhole the output so it doesn't clutter vitest.
     const r1 = multiSemanticRelease(
       ['src/test/fixtures/DOESNOTEXIST.json'],
       {},
@@ -1196,7 +1195,7 @@ describe('multiSemanticRelease()', () => {
     await expect(r3).rejects.toBeInstanceOf(ReferenceError) // Directory that exists.
   })
   test('SyntaxError if paths points to package.json with bad syntax', async () => {
-    const stdout = new WritableStreamBuffer() as any // Blackhole the output so it doesn't clutter Jest.
+    const stdout = new WritableStreamBuffer() as any // Blackhole the output so it doesn't clutter vitest.
     const r1 = multiSemanticRelease(
       ['src/test/fixtures/invalidPackage.json'],
       {},

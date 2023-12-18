@@ -3,4 +3,4 @@ dist
 coverage
 commitlint.config.cjs
 .eslintrc.cjs
-jest.config.cjs
+vitest.config.ts

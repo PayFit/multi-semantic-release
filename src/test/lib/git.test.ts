@@ -1,6 +1,5 @@
 import { temporaryDirectory } from 'tempy'
 import { WritableStreamBuffer } from 'stream-buffers'
-import { jest } from '@jest/globals'
 
 import multiSemanticRelease from '../../lib/multiSemanticRelease.js'
 import { copyDirectory, createNewTestingFiles } from '../helpers/file.js'
@@ -12,7 +11,7 @@ import {
 } from '../helpers/git.js'
 import { getTags } from '../../lib/git.js'
 
-jest.setTimeout(50000)
+vi.setConfig({ testTimeout: 50000 })
 
 test('Fetch all tags on master after two package release', async () => {
   const packages = ['packages/c/', 'packages/d/']
