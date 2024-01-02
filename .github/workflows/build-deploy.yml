@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           cache: yarn
           node-version: '20.x'
@@ -30,7 +30,7 @@ jobs:
       - run: git config --global user.name github-actions
       - run: git config --global user.email github-actions@github.com
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           cache: yarn
           node-version: ${{ matrix.node-version }}
@@ -49,7 +49,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           cache: yarn
           node-version: '20.x'
