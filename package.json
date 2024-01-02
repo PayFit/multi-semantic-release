@@ -34,7 +34,7 @@
     "async-mutex": "^0.4.0",
     "batching-toposort": "^1.2.0",
     "blork": "^9.3.0",
-    "cosmiconfig": "^8.0.0",
+    "cosmiconfig": "^9.0.0",
     "debug": "^4.3.2",
     "detect-indent": "^7.0.0",
     "detect-newline": "^4.0.0",
