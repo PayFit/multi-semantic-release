@@ -23,17 +23,21 @@ export default (flags: Flags) => {
     multiSemanticRelease(paths, {}, { cwd }, flags).then(
       () => {
         // Success.
+        // eslint-disable-next-line n/no-process-exit
         process.exit(0)
       },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (error: any) => {
         // Log out errors.
         console.error(`[multi-semantic-release]:`, error)
+        // eslint-disable-next-line n/no-process-exit
         process.exit(1)
       },
     )
   } catch (error) {
     // Log out errors.
     console.error(`[multi-semantic-release]:`, error)
+    // eslint-disable-next-line n/no-process-exit
     process.exit(1)
   }
 }

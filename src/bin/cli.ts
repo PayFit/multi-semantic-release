@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import meow from 'meow'
 import { toPairs, set } from 'lodash-es'
 

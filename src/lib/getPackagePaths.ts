@@ -15,9 +15,11 @@ export default function getPackagePaths(
   cwd: string,
   ignorePackages?: string[],
 ): string[] {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   let workspace: Packages = {
     tool: 'root',
     root: { dir: cwd },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any
 
   // Ignore exceptions as we will rely on `getManifest` validation
@@ -27,8 +29,10 @@ export default function getPackagePaths(
     /**/
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   workspace.root.packageJson = getManifest(
     path.join(workspace.root.dir, 'package.json'),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ) as any
 
   if (workspace.tool === 'root') {

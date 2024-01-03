@@ -70,10 +70,12 @@ export default function createInlinePluginCreator(
 
       pkg._ready = true
 
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const res = await plugins.verifyConditions(context) // Semantic release don't expose methods in their types
 
       debug('verified conditions: %s', pkg.name)
 
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return res
     }
 
@@ -116,6 +118,7 @@ export default function createInlinePluginCreator(
       pkg._lastRelease = context.lastRelease
 
       // Set nextType for package from plugins.
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       pkg._nextType = await plugins.analyzeCommits(context)
 
       // Wait until all todo packages have been analyzed.
@@ -181,6 +184,7 @@ export default function createInlinePluginCreator(
         context.lastRelease.gitHead = await getTagHead(
           context.lastRelease.gitTag,
           {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             cwd: context.options?.cwd,
             env: context.env,
           },
@@ -204,9 +208,11 @@ export default function createInlinePluginCreator(
 
       // Get subnotes and add to list.
       // Inject pkg name into title if it matches e.g. `# 1.0.0` or `## [1.0.1]` (as generate-release-notes does).
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const subs = await plugins.generateNotes(context)
       // istanbul ignore else (unnecessary to test)
       if (subs) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
         notes.push(subs.replace(/^(#+) (\[?\d+\.\d+\.\d+\]?)/, `$1 ${name} $2`))
       }
 
@@ -235,6 +241,7 @@ export default function createInlinePluginCreator(
       updateManifestDeps(pkg)
       pkg._depsUpdated = true
 
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const res = await plugins.prepare(context)
       pkg._prepared = true
 
@@ -242,6 +249,7 @@ export default function createInlinePluginCreator(
 
       await mutex.acquire()
 
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return res
     }
 
@@ -249,12 +257,14 @@ export default function createInlinePluginCreator(
       mutex.release()
       next()
 
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const res = await plugins.publish(context)
       pkg._published = true
 
       debug('published: %s', pkg.name)
 
       // istanbul ignore next
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
       return res.length ? res[0] : {}
     }
 

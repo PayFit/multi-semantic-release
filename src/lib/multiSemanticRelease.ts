@@ -93,7 +93,7 @@ export default async function multiSemanticRelease(
   try {
     const batches = batchingToposort(pkgDag)
     for (const batch of batches) {
-      const promises: Array<Promise<void>> = []
+      const promises: Promise<void>[] = []
       for (const pkgName of batch) {
         const pkg = packages.find(_pkg => _pkg.name === pkgName)
         if (!pkg) {
@@ -125,8 +125,8 @@ export default async function multiSemanticRelease(
       )
     })
     return packages
-  } catch (err: any) {
-    if (err.message?.startsWith('Cycle(s) detected;')) {
+  } catch (err: unknown) {
+    if (err instanceof Error && err.message.startsWith('Cycle(s) detected;')) {
       throw new Error('Cycle has been detected in local dependencies.')
     }
 
@@ -182,6 +182,7 @@ async function getPackage(
 
   // Use semantic-release's internal config (now we have the right `options.plugins` setting) to get the plugins object and the package options including defaults.
   // We need this so we can call e.g. plugins.analyzeCommit() to be able to affect the input and output of the whole set of plugins.
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { options, plugins } = await getConfigSemantic(
     { cwd: dir, env, stdout, stderr, logger, globalOptions, inputOptions },
     finalOptions,
@@ -194,7 +195,9 @@ async function getPackage(
     name,
     manifest,
     deps,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     options,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     plugins,
     loggerRef: logger,
     localDeps: [],
@@ -247,7 +250,7 @@ async function releasePackage(
   pkg.result = await semanticRelease(options, {
     cwd: dir,
     env,
-    stdout: new RescopedStream(stdout, name) as any as WriteStream,
-    stderr: new RescopedStream(stderr, name) as any as WriteStream,
+    stdout: new RescopedStream(stdout, name) as unknown as WriteStream,
+    stderr: new RescopedStream(stderr, name) as unknown as WriteStream,
   })
 }

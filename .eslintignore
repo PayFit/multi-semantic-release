@@ -4,3 +4,4 @@ coverage
 commitlint.config.cjs
 .eslintrc.cjs
 vitest.config.ts
+*.d.ts

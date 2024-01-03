@@ -21,6 +21,7 @@ async function streamToCommits(stream: Stream): Promise<Commit[]> {
   const chunks: Commit[] = []
   return await new Promise((resolve, reject) => {
     stream.on('data', commit => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       chunks.push(commit)
     })
     stream.on('error', err => {

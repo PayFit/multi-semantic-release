@@ -1,4 +1,4 @@
-// @ts-expect-error
+// @ts-expect-error issue because we use a custom semrel implem
 import semanticGetConfig from 'semantic-release/lib/get-config.js'
 import { Options } from 'semantic-release'
 
@@ -14,16 +14,20 @@ import { BaseMultiContext } from '../typings/index.js'
  *
  * @internal
  */
+// eslint-disable-next-line @typescript-eslint/require-await
 export default async function getConfigSemantic(
   { cwd, env, stdout, stderr, logger }: BaseMultiContext,
   options: Options,
 ) {
   try {
     // Return semantic-release's getConfig script.
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
     return semanticGetConfig({ cwd, env, stdout, stderr, logger }, options)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     // Log error and rethrow it.
     // istanbul ignore next (not important)
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     logger.error(`Error in semantic-release getConfig(): %0`, error)
     // istanbul ignore next (not important)
     throw error

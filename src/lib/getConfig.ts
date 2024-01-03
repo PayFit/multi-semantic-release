@@ -30,5 +30,6 @@ export default async function getConfig(cwd: string): Promise<Options> {
 
   // Return the found config or empty object.
   // istanbul ignore next (not important).
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return config != null ? config.config : {}
 }
