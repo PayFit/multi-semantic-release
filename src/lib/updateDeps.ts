@@ -247,18 +247,27 @@ const auditManifestChanges = (
       | 'optionalDependencies',
       Record<string, string>
     >
-  >((res, scope) => {
-    const diff = getManifestDifference(
-      actualManifest[scope],
-      oldManifest[scope] ?? {},
-    )
+  >(
+    (res, scope) => {
+      const diff = getManifestDifference(
+        actualManifest[scope],
+        oldManifest[scope] ?? {},
+      )
 
-    if (Object.keys(diff).length > 0) {
-      res[scope] = diff
-    }
+      if (Object.keys(diff).length > 0) {
+        res[scope] = diff
+      }
 
-    return res
-  }, {} as any as Record<'dependencies' | 'devDependencies' | 'peerDependencies' | 'optionalDependencies', Record<string, string>>)
+      return res
+    },
+    {} as any as Record<
+      | 'dependencies'
+      | 'devDependencies'
+      | 'peerDependencies'
+      | 'optionalDependencies',
+      Record<string, string>
+    >,
+  )
 
   debug(debugPrefix, 'package.json path=', path)
 
