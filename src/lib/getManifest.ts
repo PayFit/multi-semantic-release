@@ -11,6 +11,7 @@ import { JSONSchemaForNPMPackageJsonFiles } from '@schemastore/package'
  */
 function readManifest(path: string): string {
   // Check it exists.
+  // eslint-disable-next-line security/detect-non-literal-fs-filename
   if (!existsSync(path)) {
     throw new ReferenceError(`package.json file not found: "${path}"`)
   }
@@ -18,6 +19,7 @@ function readManifest(path: string): string {
   // Stat the file.
   let stat
   try {
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
     stat = lstatSync(path)
   } catch (_) {
     // istanbul ignore next (hard to test — happens if no read access etc).
@@ -31,6 +33,7 @@ function readManifest(path: string): string {
 
   // Read the file.
   try {
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
     return readFileSync(path, 'utf8')
   } catch (_) {
     // istanbul ignore next (hard to test — happens if no read access etc).
@@ -55,6 +58,7 @@ export default function getManifest(
   // Parse the file.
   let manifest: JSONSchemaForNPMPackageJsonFiles
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     manifest = JSON.parse(contents)
   } catch (_) {
     throw new SyntaxError(`package.json could not be parsed: "${path}"`)

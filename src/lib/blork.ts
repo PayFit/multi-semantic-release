@@ -9,6 +9,7 @@ const isAbsolute = checker('absolute')
 // Add a directory checker.
 add(
   'directory',
+  // eslint-disable-next-line security/detect-non-literal-fs-filename, @typescript-eslint/no-unsafe-argument
   v => isAbsolute(v) && existsSync(v) && lstatSync(v).isDirectory(),
   'directory that exists in the filesystem',
 )

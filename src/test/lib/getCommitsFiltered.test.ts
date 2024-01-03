@@ -8,15 +8,15 @@ import { gitInit, gitCommitAll } from '../helpers/git.js'
 describe('getCommitsFiltered()', () => {
   test('Works correctly (no lastRelease)', async () => {
     // Create Git repo with copy of Yarn workspaces fixture.
-    const cwd = await gitInit()
+    const cwd = gitInit()
     writeFileSync(`${cwd}/AAA.txt`, 'AAA')
-    await gitCommitAll(cwd, 'Commit 1')
+    gitCommitAll(cwd, 'Commit 1')
     mkdirSync(`${cwd}/bbb`)
     writeFileSync(`${cwd}/bbb/BBB.txt`, 'BBB')
-    const sha2 = await gitCommitAll(cwd, 'Commit 2')
+    const sha2 = gitCommitAll(cwd, 'Commit 2')
     mkdirSync(`${cwd}/ccc`)
     writeFileSync(`${cwd}/ccc/CCC.txt`, 'CCC')
-    await gitCommitAll(cwd, 'Commit 3')
+    gitCommitAll(cwd, 'Commit 3')
 
     // Filter a single directory of the repo.
     const commits = await getCommitsFiltered(cwd, 'bbb/')
@@ -26,15 +26,15 @@ describe('getCommitsFiltered()', () => {
   })
   test('Works correctly (with lastRelease)', async () => {
     // Create Git repo with copy of Yarn workspaces fixture.
-    const cwd = await gitInit()
+    const cwd = gitInit()
     writeFileSync(`${cwd}/AAA.txt`, 'AAA')
-    await gitCommitAll(cwd, 'Commit 1')
+    gitCommitAll(cwd, 'Commit 1')
     mkdirSync(`${cwd}/bbb`)
     writeFileSync(`${cwd}/bbb/BBB.txt`, 'BBB')
-    await gitCommitAll(cwd, 'Commit 2')
+    gitCommitAll(cwd, 'Commit 2')
     mkdirSync(`${cwd}/ccc`)
     writeFileSync(`${cwd}/ccc/CCC.txt`, 'CCC')
-    const sha3 = await gitCommitAll(cwd, 'Commit 3')
+    const sha3 = gitCommitAll(cwd, 'Commit 3')
 
     // Filter a single directory of the repo since sha3
     const commits = await getCommitsFiltered(cwd, 'bbb/', sha3)
@@ -43,17 +43,17 @@ describe('getCommitsFiltered()', () => {
 
   test('Works correctly (with lastRelease and nextRelease)', async () => {
     // Create Git repo with copy of Yarn workspaces fixture.
-    const cwd = await gitInit()
+    const cwd = gitInit()
     writeFileSync(`${cwd}/AAA.txt`, 'AAA')
-    await gitCommitAll(cwd, 'Commit 1')
+    gitCommitAll(cwd, 'Commit 1')
     mkdirSync(`${cwd}/bbb`)
     writeFileSync(`${cwd}/bbb/BBB.txt`, 'BBB')
-    const sha2 = await gitCommitAll(cwd, 'Commit 2')
+    const sha2 = gitCommitAll(cwd, 'Commit 2')
     writeFileSync(`${cwd}/bbb/BBB2.txt`, 'BBB2')
-    const sha3 = await gitCommitAll(cwd, 'Commit 3')
+    const sha3 = gitCommitAll(cwd, 'Commit 3')
     mkdirSync(`${cwd}/ccc`)
     writeFileSync(`${cwd}/ccc/CCC.txt`, 'CCC')
-    await gitCommitAll(cwd, 'Commit 4')
+    gitCommitAll(cwd, 'Commit 4')
 
     // Filter a single directory from sha2 (lastRelease) to sha3 (nextRelease)
     const commits = await getCommitsFiltered(cwd, 'bbb/', sha2, sha3)
@@ -62,13 +62,13 @@ describe('getCommitsFiltered()', () => {
   })
   test('Works correctly (initial commit)', async () => {
     // Create Git repo with copy of Yarn workspaces fixture.
-    const cwd = await gitInit()
+    const cwd = gitInit()
     mkdirSync(`${cwd}/bbb`)
     mkdirSync(`${cwd}/ccc`)
     writeFileSync(`${cwd}/AAA.txt`, 'AAA')
     writeFileSync(`${cwd}/bbb/BBB.txt`, 'BBB')
     writeFileSync(`${cwd}/ccc/CCC.txt`, 'CCC')
-    const sha = await gitCommitAll(cwd, 'Initial commit')
+    const sha = gitCommitAll(cwd, 'Initial commit')
 
     // Filter a single directory of the repo.
     const commits = await getCommitsFiltered(cwd, 'bbb/')

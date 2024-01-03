@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { JSONSchemaForNPMPackageJsonFiles } from '@schemastore/package'
 import {
   BranchSpec,
@@ -19,7 +20,7 @@ export interface Plugins {
   publish: (context: Context) => any
 }
 
-export type Logger = {
+export interface Logger {
   error: (message: string, fields?: Record<string, any>) => void
   log: (message: string, fields?: Record<string, any>) => void
 }

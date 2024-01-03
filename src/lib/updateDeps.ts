@@ -226,6 +226,7 @@ export function resolveReleaseType(
  * @internal
  */
 const auditManifestChanges = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   actualManifest: Record<string, any>,
   path: string,
 ): boolean => {
@@ -250,6 +251,7 @@ const auditManifestChanges = (
   >(
     (res, scope) => {
       const diff = getManifestDifference(
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         actualManifest[scope],
         oldManifest[scope] ?? {},
       )
@@ -260,7 +262,7 @@ const auditManifestChanges = (
 
       return res
     },
-    {} as any as Record<
+    {} as unknown as Record<
       | 'dependencies'
       | 'devDependencies'
       | 'peerDependencies'
@@ -289,17 +291,22 @@ const auditManifestChanges = (
  */
 export const updateManifestDeps = (pkg: Package): void => {
   const { manifest, path } = pkg
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const { indent, trailingWhitespace } = recognizeFormat(manifest.__contents__)
 
   // Loop through localDeps to verify release consistency.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   pkg.localDeps.forEach((d: any) => {
     // Get version of dependency.
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
     const release = d._nextRelease ?? d._lastRelease
 
     // Cannot establish version.
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     if (!release?.version) {
       throw Error(
         `Cannot release because dependency ${
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           d.name as string
         } has not been released`,
       )
@@ -311,6 +318,7 @@ export const updateManifestDeps = (pkg: Package): void => {
   }
 
   // Write package.json back out.
+  // eslint-disable-next-line security/detect-non-literal-fs-filename
   writeFileSync(
     path,
     JSON.stringify(manifest, null, indent) + trailingWhitespace,
