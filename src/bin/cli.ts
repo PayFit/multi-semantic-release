@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+
+// eslint-disable-next-line n/shebang
 import meow from 'meow'
 import { toPairs, set } from 'lodash-es'
 
