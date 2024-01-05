@@ -50,7 +50,7 @@
     "stream-buffers": "^3.0.2"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "17.8.1",
+    "@commitlint/config-conventional": "18.4.4",
     "@schemastore/package": "0.0.10",
     "@types/cosmiconfig": "6.0.0",
     "@types/debug": "4.1.12",
@@ -63,7 +63,7 @@
     "@types/stream-buffers": "3.0.7",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
-    "commitlint": "17.8.1",
+    "commitlint": "18.4.4",
     "coveralls": "3.1.1",
     "eslint": "8.56.0",
     "eslint-config-prettier": "8.10.0",
