@@ -1037,13 +1037,6 @@
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.4.tgz#56e2cc26c397c038fab0e3a917a12d5c5909e901"
   integrity sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==
 
-"@types/semantic-release@20.0.6":
-  version "20.0.6"
-  resolved "https://registry.yarnpkg.com/@types/semantic-release/-/semantic-release-20.0.6.tgz#9883bd8557829af92097eea0e089b3c2f4213573"
-  integrity sha512-8YJXvsT1FwMrNdZI1e6NBHPzZWendDiUsLryzxurdup+9LnV3s9fF4NgO0D3LkBfLMnocb4Ax6TQ5yFdF3dXGQ==
-  dependencies:
-    "@types/node" "*"
-
 "@types/semver@7.5.6", "@types/semver@^7.5.0":
   version "7.5.6"
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.5.6.tgz#c65b2bfce1bec346582c07724e3f8c1017a20339"
@@ -4783,10 +4776,10 @@ safe-regex@^2.1.1:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-semantic-release@23.0.0-beta.5:
-  version "23.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-23.0.0-beta.5.tgz#831c314824f0d36048e1d6eab441c5f0b65e3b34"
-  integrity sha512-fbGX67hVgTcNP0a1a+JqLypb+z/hH0fjB7J8OiIQ3aOeSocl1ZHAox9MNmEPhq4k3z2Tqn3gq00kQkSYIXaCAQ==
+semantic-release@23.0.0:
+  version "23.0.0"
+  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-23.0.0.tgz#ecb3685116f5ff284824e7c377cf9a3ce80c5428"
+  integrity sha512-Jz7jEWO2igTtske112gC4PPE2whCMVrsgxUPG3/SZI7VE357suIUZFlJd1Yu0g2I6RPc2HxNEfUg7KhmDTjwqg==
   dependencies:
     "@semantic-release/commit-analyzer" "^11.0.0"
     "@semantic-release/error" "^4.0.0"

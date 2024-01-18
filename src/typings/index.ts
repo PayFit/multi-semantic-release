@@ -2,22 +2,26 @@
 import { JSONSchemaForNPMPackageJsonFiles } from '@schemastore/package'
 import {
   BranchSpec,
-  Commit,
-  Context,
   LastRelease,
   NextRelease,
   Options,
   Result,
+  VerifyConditionsContext,
+  AnalyzeCommitsContext,
+  GenerateNotesContext,
+  PrepareContext,
+  PublishContext,
+  BaseContext,
 } from 'semantic-release'
 import { ReleaseType } from 'semver'
 import { WriteStream } from 'tty'
 
 export interface Plugins {
-  verifyConditions: (context: Context) => any
-  analyzeCommits: (context: Context) => any
-  generateNotes: (context: Context) => any
-  prepare: (context: Context) => any
-  publish: (context: Context) => any
+  verifyConditions: (context: VerifyConditionsContext) => any
+  analyzeCommits: (context: AnalyzeCommitsContext) => any
+  generateNotes: (context: GenerateNotesContext) => any
+  prepare: (context: PrepareContext) => any
+  publish: (context: PublishContext) => any
 }
 
 export interface Logger {
@@ -37,7 +41,7 @@ export interface Package {
   // Array of local dependencies this package relies on.
   localDeps: Package[]
   // The semantic-release context for this package's release (filled in once semantic-release runs).
-  context?: Context
+  context?: BaseContext
   // The result of semantic-release (object with lastRelease, nextRelease, commits, releases), false if this package was skipped (no changes or similar), or undefined if the package's release hasn't completed yet.
   result?: Result
   // The manifest read from the `package.json` of the package
@@ -112,12 +116,4 @@ export interface Flags extends Record<string, any> {
     release?: ReleaseType | 'inherit'
   }
   concurrent?: boolean
-}
-
-export interface VerifyConditionsContext extends Context {
-  branch: Exclude<BranchSpec, string>
-}
-
-export interface AnalyzeCommitsContext extends VerifyConditionsContext {
-  commits: Commit[]
 }

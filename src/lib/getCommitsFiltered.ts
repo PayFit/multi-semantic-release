@@ -50,7 +50,6 @@ export default async function getCommitsFiltered(
   cwd: string,
   dir: string,
   lastRelease?: string,
-  nextRelease?: string,
   firstParentBranch?: string,
 ): Promise<Commit[]> {
   // Clean paths and make sure directories exist.
@@ -62,7 +61,6 @@ export default async function getCommitsFiltered(
   dir = cleanPath(dir, cwd)
   check(dir, 'dir: directory')
   check(lastRelease, 'lastRelease: alphanumeric{40}?')
-  check(nextRelease, 'nextRelease: alphanumeric{40}?')
 
   // target must be inside and different than cwd.
   if (!dir.startsWith(cwd)) {
@@ -81,8 +79,7 @@ export default async function getCommitsFiltered(
   const firstParentBranchFilter = firstParentBranch
     ? ['--first-parent', firstParentBranch]
     : []
-  const range =
-    (lastRelease ? `${lastRelease}..` : '') + (nextRelease ?? 'HEAD')
+  const range = (lastRelease ? `${lastRelease}..` : '') + 'HEAD'
   const gitLogFilterQuery = [...firstParentBranchFilter, range, '--', relpath]
   const stream = gitLogParser.parse(
     { _: gitLogFilterQuery },

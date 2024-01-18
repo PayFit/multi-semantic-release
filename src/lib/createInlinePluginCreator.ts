@@ -1,15 +1,20 @@
 /* eslint-disable no-param-reassign */
 import debugFactory from 'debug'
-import { Config, Context } from 'semantic-release'
+import {
+  AnalyzeCommitsContext,
+  Config,
+  GenerateNotesContext,
+  PrepareContext,
+  PublishContext,
+  VerifyConditionsContext,
+} from 'semantic-release'
 import { Mutex } from 'async-mutex'
 
 import {
-  AnalyzeCommitsContext,
   BaseMultiContext,
   Flags,
   Package,
   PluginOption,
-  VerifyConditionsContext,
 } from '../typings/index.js'
 
 import getCommitsFiltered from './getCommitsFiltered.js'
@@ -66,6 +71,7 @@ export default function createInlinePluginCreator(
       context: VerifyConditionsContext,
     ) => {
       // Restore context for plugins that does not rely on parsed opts.
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       Object.assign(context.options ?? {}, context.options?._pkgOptions)
 
       pkg._ready = true
@@ -107,7 +113,6 @@ export default function createInlinePluginCreator(
         cwd,
         dir,
         context.lastRelease != null ? context.lastRelease.gitHead : undefined,
-        context.nextRelease != null ? context.nextRelease.gitHead : undefined,
         firstParentBranch,
       )
 
@@ -167,7 +172,7 @@ export default function createInlinePluginCreator(
      */
     const generateNotes = async (
       pluginOptions: Config,
-      context: AnalyzeCommitsContext,
+      context: GenerateNotesContext,
     ) => {
       // Set nextRelease for package.
       pkg._nextRelease = context.nextRelease
@@ -184,7 +189,7 @@ export default function createInlinePluginCreator(
         context.lastRelease.gitHead = await getTagHead(
           context.lastRelease.gitTag,
           {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
             cwd: context.options?.cwd,
             env: context.env,
           },
@@ -199,7 +204,6 @@ export default function createInlinePluginCreator(
         cwd,
         dir,
         context.lastRelease != null ? context.lastRelease.gitHead : undefined,
-        context.nextRelease != null ? context.nextRelease.gitHead : undefined,
         firstParentBranch,
       )
 
@@ -237,7 +241,7 @@ export default function createInlinePluginCreator(
       return notes.join('\n\n')
     }
 
-    const prepare = async (pluginOptions: Config, context: Context) => {
+    const prepare = async (pluginOptions: Config, context: PrepareContext) => {
       updateManifestDeps(pkg)
       pkg._depsUpdated = true
 
@@ -253,7 +257,7 @@ export default function createInlinePluginCreator(
       return res
     }
 
-    const publish = async (pluginOptions: Config, context: Context) => {
+    const publish = async (pluginOptions: Config, context: PublishContext) => {
       mutex.release()
       next()
 
