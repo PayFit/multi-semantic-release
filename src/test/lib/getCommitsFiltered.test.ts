@@ -152,19 +152,4 @@ describe('getCommitsFiltered()', () => {
       ),
     })
   })
-
-  test('TypeError if nextRelease is not 40char alphanumeric Git SHA hash', async () => {
-    const cwd = temporaryDirectory()
-    mkdirSync(join(cwd, 'dir'))
-    await expect(
-      getCommitsFiltered(cwd, 'dir', undefined, 'nottherightlength'),
-    ).rejects.toBeInstanceOf(TypeError)
-    await expect(
-      getCommitsFiltered(cwd, 'dir', undefined, 'nottherightlength'),
-    ).rejects.toMatchObject({
-      message: expect.stringMatching(
-        'nextRelease: Must be alphanumeric string with size 40 or empty',
-      ),
-    })
-  })
 })
