@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@manypkg/get-packages": "^1.1.1",
-    "async-mutex": "^0.4.0",
+    "async-mutex": "^0.5.0",
     "batching-toposort": "^1.2.0",
     "blork": "^9.3.0",
     "cosmiconfig": "^9.0.0",
