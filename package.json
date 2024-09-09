@@ -76,7 +76,7 @@
     "prettier": "3.3.3",
     "tempy": "3.1.0",
     "ts-node": "10.9.2",
-    "typescript": "5.5.4",
+    "typescript": "5.6.2",
     "vitest": "2.0.5"
   },
   "repository": {
