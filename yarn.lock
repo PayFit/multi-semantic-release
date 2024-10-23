@@ -1074,10 +1074,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/cosmiconfig@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@types/cosmiconfig/-/cosmiconfig-6.0.0.tgz#ffb5494a91feab3088985caeb089a9ff851795a2"
-  integrity sha512-KxKYXK5K1W+SVj1wjBBlwUs43K2D4iteye+r2ObPPQ7+NVASxSPfTb5H8iPW0bLswapMvaA4YMnxdKx7M4k29A==
+"@types/cosmiconfig@6.0.3":
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/@types/cosmiconfig/-/cosmiconfig-6.0.3.tgz#03e26eb39c438ff7949ad950f887baf49aa383b8"
+  integrity sha512-SiTm0f1L6hGrhqAE1bb5GSC9Ay9v9lCSA2mYUH91p6kBMdkbDfuXIyCBmhD6PmSJTiF7ZHS95BTPc0HPqlnWgw==
   dependencies:
     cosmiconfig "*"
 
