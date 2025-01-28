@@ -42,7 +42,7 @@ export default function createInlinePluginCreator(
   // Vars.
   const { cwd } = multiContext
 
-  const mutex = new Mutex()
+  const globalMutex = new Mutex()
 
   /**
    * Create an inline plugin for an individual package in a multirelease.
@@ -56,9 +56,6 @@ export default function createInlinePluginCreator(
   function createInlinePlugin(pkg: Package) {
     // Vars.
     const { plugins, dir, name } = pkg
-    const next = () => {
-      pkg._tagged = true
-    }
 
     /**
      * @param pluginOptions Options to configure this plugin.
@@ -73,8 +70,6 @@ export default function createInlinePluginCreator(
       // Restore context for plugins that does not rely on parsed opts.
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       Object.assign(context.options ?? {}, context.options?._pkgOptions)
-
-      pkg._ready = true
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const res = await plugins.verifyConditions(context) // Semantic release don't expose methods in their types
@@ -102,8 +97,11 @@ export default function createInlinePluginCreator(
       pluginOptions: Config,
       context: AnalyzeCommitsContext,
     ) => {
-      pkg._preRelease = context.branch.prerelease ?? null
-      pkg._branch = context.branch.name
+      const localDepsAnalyzeMutex = pkg.localDeps.map(
+        (d: Package) => d._analyzeMutex,
+      )
+
+      await Promise.all(localDepsAnalyzeMutex.map(m => m.waitForUnlock()))
 
       // Filter commits by directory.
       const firstParentBranch = flags.firstParent
@@ -126,9 +124,6 @@ export default function createInlinePluginCreator(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       pkg._nextType = await plugins.analyzeCommits(context)
 
-      // Wait until all todo packages have been analyzed.
-      pkg._analyzed = true
-
       // Make sure type is "patch" if the package has any deps that have changed.
       pkg._nextType = resolveReleaseType(
         pkg,
@@ -136,6 +131,8 @@ export default function createInlinePluginCreator(
         flags.deps?.bump,
         flags.deps?.release,
       )
+
+      pkg._analyzeMutex.release()
 
       debug('commits analyzed: %s', pkg.name)
       debug('release type: %s', pkg._nextType)
@@ -233,41 +230,38 @@ export default function createInlinePluginCreator(
 
       debug('notes generated: %s', pkg.name)
 
-      if (pkg.options.dryRun) {
-        next()
-      }
-
       // Return the notes.
       return notes.join('\n\n')
     }
 
     const prepare = async (pluginOptions: Config, context: PrepareContext) => {
+      // Wait that dependecy are published before preparing these packages
+      const localDepsPublishMutex = pkg.localDeps.map((d: Package) => {
+        if (d._nextRelease) return d._publishMutex
+      })
+      await Promise.all(localDepsPublishMutex.map(m => m?.waitForUnlock()))
       updateManifestDeps(pkg)
-      pkg._depsUpdated = true
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const res = await plugins.prepare(context)
-      pkg._prepared = true
 
       debug('prepared: %s', pkg.name)
 
-      await mutex.acquire()
+      // Between "prepare" and "publish" semantic-release push some tags on Git. These operations cannot be done in parallel.
+      await globalMutex.acquire()
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return res
     }
 
     const publish = async (pluginOptions: Config, context: PublishContext) => {
-      mutex.release()
-      next()
+      globalMutex.release()
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const res = await plugins.publish(context)
-      pkg._published = true
 
       debug('published: %s', pkg.name)
-
-      // istanbul ignore next
+      pkg._publishMutex.release()
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
       return res.length ? res[0] : {}
     }
