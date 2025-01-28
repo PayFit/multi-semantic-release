@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { JSONSchemaForNPMPackageJsonFiles } from '@schemastore/package'
 import {
-  BranchSpec,
   LastRelease,
   NextRelease,
   Options,
@@ -54,28 +53,12 @@ export interface Package {
   loggerRef: Logger
 
   /* Keys used in the inline plugin creator */
-  // True if the package has been tagged with its new version
-  _tagged?: boolean
   // The next version type that will be applied to the package
   _nextType?: ReleaseType
-  // If the package is ready to be release
-  _ready?: boolean
-  // If the next version is a pre release
-  _preRelease?: string | boolean | undefined | null
-  // The specification of the branch
-  _branch?: BranchSpec
   // Last release of the package
   _lastRelease?: LastRelease
-  // If the package commits have been analyzed
-  _analyzed?: boolean
   // Next release of the package
   _nextRelease?: NextRelease
-  // If the package dependencies have been updated
-  _depsUpdated?: boolean
-  // If the package is prepared
-  _prepared?: boolean
-  // If the package has been published
-  _published?: boolean
 }
 
 export interface BaseMultiContext {

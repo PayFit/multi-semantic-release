@@ -3,6 +3,7 @@ import semanticRelease, { Options, Result } from 'semantic-release'
 import { uniq } from 'lodash-es'
 import { WriteStream } from 'tty'
 import batchingToposort from 'batching-toposort'
+import { Mutex } from 'async-mutex'
 
 import { BaseMultiContext, Flags, Package } from '../typings/index.js'
 
@@ -92,8 +93,13 @@ export default async function multiSemanticRelease(
 
   try {
     const batches = batchingToposort(pkgDag)
+    const promises: Promise<void>[] = []
+    let previousBatchMutex: Mutex | undefined
+
     for (const batch of batches) {
-      const promises: Promise<void>[] = []
+      const batchPromises: Promise<void>[] = []
+      // Only "prepare" and "publish" must be run sequentially between batches. This allow to run "analyzeCommits" and "generateNotes" for all batches concurrently.
+
       for (const pkgName of batch) {
         const pkg = packages.find(_pkg => _pkg.name === pkgName)
         if (!pkg) {
@@ -101,15 +107,35 @@ export default async function multiSemanticRelease(
         }
 
         if (flags.concurrent) {
-          promises.push(
-            releasePackage(pkg, createInlinePlugin, multiContext, flags),
+          batchPromises.push(
+            releasePackage(
+              pkg,
+              createInlinePlugin,
+              multiContext,
+              flags,
+              previousBatchMutex,
+            ),
           )
         } else {
           await releasePackage(pkg, createInlinePlugin, multiContext, flags)
         }
       }
-      await Promise.all(promises)
+
+      if (flags.concurrent) {
+        const batchMutex = new Mutex()
+        previousBatchMutex = batchMutex
+
+        promises.push(
+          (async function () {
+            await batchMutex.acquire()
+            await Promise.all(batchPromises)
+            batchMutex.release()
+          })(),
+        )
+      }
     }
+
+    await Promise.all(promises)
 
     const releasePackages = packages.filter(pkg => pkg.result)
 
@@ -220,6 +246,7 @@ async function releasePackage(
   createInlinePlugin: ReturnType<typeof createInlinePluginCreator>,
   multiContext: BaseMultiContext,
   flags: Flags,
+  dependencyBatchMutex?: Mutex,
 ) {
   // Vars.
   const { options: pkgOptions, name, dir } = pkg
@@ -228,7 +255,7 @@ async function releasePackage(
   // Make an 'inline plugin' for this package.
   // The inline plugin is the only plugin we call semanticRelease() with.
   // The inline plugin functions then call e.g. plugins.analyzeCommits() manually and sometimes manipulate the responses.
-  const inlinePlugin = createInlinePlugin(pkg)
+  const inlinePlugin = createInlinePlugin(pkg, dependencyBatchMutex)
 
   // Set the options that we call semanticRelease() with.
   // This consists of:

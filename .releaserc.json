@@ -1,0 +1,14 @@
+{
+  "slackWebhookEnVar": "CHANGELOG_WEBHOOK",
+  "branches": [
+    {
+      "name": "master",
+      "channel": "latest"
+    },
+    {
+      "name": "feat-better-concurrency",
+      "channel": "beta",
+      "prerelease": "alpha"
+    }
+  ]
+}
