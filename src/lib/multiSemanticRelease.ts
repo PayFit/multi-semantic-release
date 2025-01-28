@@ -3,6 +3,7 @@ import semanticRelease, { Options, Result } from 'semantic-release'
 import { uniq } from 'lodash-es'
 import { WriteStream } from 'tty'
 import batchingToposort from 'batching-toposort'
+import { Mutex } from 'async-mutex'
 
 import { BaseMultiContext, Flags, Package } from '../typings/index.js'
 
@@ -65,6 +66,7 @@ export default async function multiSemanticRelease(
   const packages = await Promise.all(
     paths.map(async path => await getPackage(path, multiContext)),
   )
+
   packages.forEach(pkg => {
     // Once we load all the packages we can find their cross refs
     // Make a list of local dependencies.
@@ -82,33 +84,33 @@ export default async function multiSemanticRelease(
   // Release all packages.
   const createInlinePlugin = createInlinePluginCreator(multiContext, flags)
 
-  const pkgDag = packages.reduce<Record<string, string[]>>(
-    (acc, pkg) => {
-      pkg.localDeps.forEach(dep => acc[dep.name].push(pkg.name))
-      return acc
-    },
-    packages.reduce((acc, pkg) => ({ ...acc, [pkg.name]: [] }), {}),
-  )
-
   try {
-    const batches = batchingToposort(pkgDag)
-    for (const batch of batches) {
-      const promises: Promise<void>[] = []
-      for (const pkgName of batch) {
-        const pkg = packages.find(_pkg => _pkg.name === pkgName)
-        if (!pkg) {
-          throw new Error(`Inexistant package ${pkgName} in batch`)
-        }
+    if (flags.concurrent) {
+      await Promise.all(
+        packages.map(pkg =>
+          releasePackage(pkg, createInlinePlugin, multiContext, flags),
+        ),
+      )
+    } else {
+      const pkgDag = packages.reduce<Record<string, string[]>>(
+        (acc, pkg) => {
+          pkg.localDeps.forEach(dep => acc[dep.name].push(pkg.name))
+          return acc
+        },
+        packages.reduce((acc, pkg) => ({ ...acc, [pkg.name]: [] }), {}),
+      )
 
-        if (flags.concurrent) {
-          promises.push(
-            releasePackage(pkg, createInlinePlugin, multiContext, flags),
-          )
-        } else {
+      const batches = batchingToposort(pkgDag)
+      for (const batch of batches) {
+        for (const pkgName of batch) {
+          const pkg = packages.find(_pkg => _pkg.name === pkgName)
+          if (!pkg) {
+            throw new Error(`Inexistant package ${pkgName} in batch`)
+          }
+
           await releasePackage(pkg, createInlinePlugin, multiContext, flags)
         }
       }
-      await Promise.all(promises)
     }
 
     const releasePackages = packages.filter(pkg => pkg.result)
@@ -189,7 +191,7 @@ async function getPackage(
   )
 
   // Return package object.
-  return {
+  const pkg = {
     path,
     dir,
     name,
@@ -201,7 +203,14 @@ async function getPackage(
     plugins,
     loggerRef: logger,
     localDeps: [],
+    _analyzeMutex: new Mutex(),
+    _publishMutex: new Mutex(),
   }
+
+  await pkg._analyzeMutex.acquire()
+  await pkg._publishMutex.acquire()
+
+  return pkg
 }
 
 /**
