@@ -38,7 +38,7 @@
     "debug": "^4.3.2",
     "detect-indent": "^7.0.0",
     "detect-newline": "^4.0.0",
-    "execa": "^8.0.0",
+    "execa": "^9.0.0",
     "git-log-parser": "^1.2.0",
     "globby": "^16.0.0",
     "lodash-es": "^4.17.21",
