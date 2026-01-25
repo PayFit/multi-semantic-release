@@ -5135,10 +5135,10 @@ temp-dir@^3.0.0:
   resolved "https://registry.yarnpkg.com/temp-dir/-/temp-dir-3.0.0.tgz#7f147b42ee41234cc6ba3138cd8e8aa2302acffa"
   integrity sha512-nHc6S/bwIilKHNRgK/3jlhDoIHcp45YgyiwcAk46Tr0LfEqGBVpmiAyuiuxeVE44m3mXnEeVhaipLOEWmH+Njw==
 
-tempy@3.1.1, tempy@^3.0.0:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/tempy/-/tempy-3.1.1.tgz#5988e40a7094f4927eb20eae8b14bb9ba46161af"
-  integrity sha512-ozXJ+Z2YduKpJuuM07LNcIxpX+r8W4J84HrgqB/ay4skWfa5MhjsVn6e2fw+bRDa8cYO5jRJWnEMWL1HqCc2sQ==
+tempy@3.1.2, tempy@^3.0.0:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/tempy/-/tempy-3.1.2.tgz#e7d9ac7a23d6281d68ff3f03cedc070c74c06728"
+  integrity sha512-pD3+21EbFZFBKDnVztX32wU6IBwkalOduWdx1OKvB5y6y1f2Xn8HU/U6o9EmlfdSyUYe9IybirmYPj/7rilA6Q==
   dependencies:
     is-stream "^3.0.0"
     temp-dir "^3.0.0"
