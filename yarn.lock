@@ -2006,10 +2006,10 @@ eslint-plugin-security@4.0.0:
   dependencies:
     safe-regex "^2.1.1"
 
-eslint-plugin-vitest-globals@1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-vitest-globals/-/eslint-plugin-vitest-globals-1.5.0.tgz#70d6fb118613543110dbee9dc59ed1032f019d72"
-  integrity sha512-ZSsVOaOIig0oVLzRTyk8lUfBfqzWxr/J3/NFMfGGRIkGQPejJYmDH3gXmSJxAojts77uzAGB/UmVrwi2DC4LYA==
+eslint-plugin-vitest-globals@1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-vitest-globals/-/eslint-plugin-vitest-globals-1.6.1.tgz#9530bbe1f2bfc9c051874cdac279badd0b80d097"
+  integrity sha512-ydMvr96XRaT913a8gy8TY/LLyGB49Wmj0+x/FCbaWSpWMSaWDLG63/5zSLLrdSGXJ0PTjWpYZOZ61YBuzNyyTw==
 
 eslint-plugin-vitest@0.4.1:
   version "0.4.1"
