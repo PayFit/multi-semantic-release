@@ -742,10 +742,10 @@
   resolved "https://registry.yarnpkg.com/@rolldown/pluginutils/-/pluginutils-1.0.0-rc.11.tgz#110d8cc72990c4e36a79791eeafe7cca979e00c9"
   integrity sha512-xQO9vbwBecJRv9EUcQ/y0dzSTJgA7Q6UVN7xp6B81+tBGSLVAK03yJ9NkJaUA7JFD91kbjxRSC/mDnmvXzbHoQ==
 
-"@schemastore/package@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@schemastore/package/-/package-1.0.1.tgz#723b42eabcef4ddede57907839909773aa2b3600"
-  integrity sha512-M6zcEX7p/zOA8GaLlzsAw9aWF7bL/NSaiUjU+dnIH1LngLUIR1cBImzMRxFcIQCmWjMUwg7lQH50+LUBvjmv8A==
+"@schemastore/package@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@schemastore/package/-/package-1.0.2.tgz#ae97c64fc2794f572445c26796c7e9bda19d8ad8"
+  integrity sha512-3yN5vJh85BMmepl3PFipVQ4wKpybYgxQNiaTUkaKKVpwbSIdNB0U7Gb8qhmY9FEJC2Bbn2L2giigMybIzuF5kQ==
 
 "@sec-ant/readable-stream@^0.4.1":
   version "0.4.1"
