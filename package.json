@@ -9,9 +9,7 @@
   },
   "type": "module",
   "exports": "./dist/lib/multiSemanticRelease.js",
-  "bin": {
-    "multi-semantic-release": "./dist/bin/cli.js"
-  },
+  "bin": "./dist/bin/cli.js",
   "files": [
     "README.md",
     "dist"
@@ -85,5 +83,6 @@
   },
   "bugs": {
     "url": "https://github.com/PayFit/multi-semantic-release/issues"
-  }
+  },
+  "packageManager": "yarn@4.13.0"
 }
