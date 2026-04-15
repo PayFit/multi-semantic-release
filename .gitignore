@@ -2,3 +2,5 @@
 /coverage/
 *.log
 dist
+
+.yarn/install-state.gz
