@@ -15,7 +15,6 @@ jobs:
       - name: Enable Corepack
         run: |
           corepack enable
-          corepack prepare yarn@4.13.0 --activate
       - name: Install dependencies
         run: yarn install --immutable
       - run: yarn lint
@@ -39,7 +38,6 @@ jobs:
       - name: Enable Corepack
         run: |
           corepack enable
-          corepack prepare yarn@4.13.0 --activate
       - name: Install dependencies
         run: yarn install --immutable
       - run: git branch
@@ -61,7 +59,6 @@ jobs:
       - name: Enable Corepack
         run: |
           corepack enable
-          corepack prepare yarn@4.13.0 --activate
       - name: Install dependencies
         run: yarn install --immutable
       - name: Release
