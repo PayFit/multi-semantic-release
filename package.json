@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "20.5.0",
-    "@schemastore/package": "1.0.2",
+    "@schemastore/package": "1.0.3",
     "@types/cosmiconfig": "6.0.3",
     "@types/debug": "4.1.13",
     "@types/execa": "2.0.2",
