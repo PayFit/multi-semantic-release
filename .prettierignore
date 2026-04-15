@@ -2,3 +2,5 @@ node_modules
 dist
 coverage
 src/test/fixtures/invalidPackage.json
+.pnp.cjs
+.pnp.loader.mjs
