@@ -1,3 +1,5 @@
+# ⚠️ THIS TOOL IS DECOMISSIONED AND SHOULD NOT BE USED ANYMORE, IN FAVOR OF TOOLING SET UP BY IDE TEAM
+
 # multi-semantic-release: hacky semantic-release for monorepos
 
 [![Travis CI](https://travis-ci.com/dhoulb/multi-semantic-release.svg?branch=master)](https://travis-ci.com/dhoulb/multi-semantic-release)
